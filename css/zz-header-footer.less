@@ -1,0 +1,205 @@
+@import "./../lib/bootstrap/bootstrap-variables.less";
+@import "variables.less";
+
+// Alle Header-Bar nutzen den gleichen Style
+.header_bar {
+    background: @header-background-color-base url('img/bg01.jpg');
+    border-bottom: 1px solid @header-background-color-dark;
+
+    .FixedPositionStyle(9950, 0, auto, auto, 0, 100%);
+
+    .header_left {
+        border-right: 1px solid @header-background-color-dark;
+        i{
+            color: @header-icon-color;
+        }
+        &:hover,
+        &:focus {
+            background: @header-background-color-dark url('img/bg01.jpg');
+            i{
+                color: lighten(@header-icon-color, 20%);
+            }
+        }
+    }
+
+    .header_center {
+        #Fonts > .Heading-Font();
+        font-size: 20px;
+        color: @header-text-color;
+
+        text-align: center;
+        vertical-align: middle;
+        padding: 0;
+        height: 40px;
+        
+    }
+
+    .header_right {
+        border-left: 1px solid @header-background-color-dark;
+        color: @header-icon-color;
+        
+        i{
+            color: @header-icon-color;
+        }
+        &:hover,
+        &:focus {
+            background: @header-background-color-dark url('img/bg01.jpg');
+            i{
+                color: lighten(@header-icon-color, 20%);
+            }
+        }
+    }
+
+    div div div {
+        height: 40px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    i {
+        color: @header-text-color;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    img {
+        .CenterItem();
+    }
+
+    span {
+        color: white;
+        text-align: center;
+    }
+}
+
+// for header template 1 (with options slide-in menue)
+.header_option_menu {
+    .FixedPositionStyle(999, 41px, auto, 0, auto, 55%, 100%);
+    background: @header-background-color-base url('img/bg01.jpg');
+    margin-left: -87%;
+    .TransistionMixin(margin-left, 1.5s, ease);
+    border-top: 1px solid @header-icon-color;
+
+    .header_option_profil {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        // .clearfix();
+        img {
+            .CenterItem();
+            height: 52px;
+            width: auto;
+            border-radius: 5px;
+        }
+
+        input {
+            border-radius: 4px;
+        }
+
+        span {
+             #Fonts > .SansSerif(bold);
+            color: @header-text-color;
+        }
+
+        button {
+            padding-right: 1px;
+            padding-left: 1px;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        i {
+            color: @awesome-icon-color-light;
+            font-size: 20px;
+            text-align: left;
+        }
+
+        .noaccount {
+            font-size: @font-size-small;
+            color: @header-text-color;
+            padding-top: 2%;
+            padding-left: 29%;
+
+
+            &:hover,
+            &:focus {
+                color: @brand-primary;
+            }
+        }
+    }
+
+    .optionListTitle{
+        background: #353D40 url('img/bg02.jpg');
+        box-shadow: 0px -1px 3px #51575a;
+        color: @brand-primary;
+        font-size: 18px;
+        font-weight: bold;
+        width: 109%;
+    }
+
+    .header_option_row {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-top: 2px solid @header-background-color-dark;
+
+        div {
+            vertical-align: middle;
+            font-family: @font-family-base;
+            color: @header-text-color;
+            font-weight: bold;
+            padding-left: 25px;
+        }
+
+        &:hover,
+        &:focus {
+            background: @header-background-color-dark url('img/bg01.jpg');
+        }
+    }
+
+    .header_option_footer {
+        margin-top: 25px;
+
+        div.btn {
+            float: right;
+            margin-bottom: 5px;
+        }
+
+        i {
+            color: @awesome-icon-color-light;
+            font-size: 20px;
+            text-align: left;
+            float: left;
+            margin-right: 5px;
+            margin-left: -11px;
+        }
+    }
+}
+    // css transition effct
+    .header_option_menu.open {
+        margin-left: 0;
+    }
+
+#headerAppOptionBtn {
+    color: @header-text-color;
+
+    i {
+        color: @awesome-icon-color-light;
+    }
+}
+
+
+// visual deactivate when optionsmenu is open
+.grayOverlayBackground{
+    .AbsolutePositionStyle(50);
+    background-color: #ccc;
+    opacity: 0;
+    visibility: hidden;
+
+    .TransistionMixin(opacity, 0.5s, ease-in-out);
+}
+
+.grayOverlayBackground.shown{
+    visibility: visible;
+    opacity: 0.75;
+}
+    
+

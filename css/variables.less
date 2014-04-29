@@ -1,0 +1,87 @@
+
+// usage:  #Fonts > .SansSerif;
+#Fonts {
+    .SansSerif (@weight: normal, @size: 14px, @lineHeight: 1.8) {
+        font-family: @font-family-sans-serif;   //bootstrap-variables
+        font-weight: @weight;
+        font-size: @size;
+        line-height: @lineHeight;
+    }
+
+    .Serif (@weight: normal, @size: 14px, @lineHeight: 1.8) {
+        font-family: @font-family-sans-serif;   //bootstrap-variables
+        font-weight: @weight;
+        font-size: @size;
+        line-height: @lineHeight;
+    }
+
+    .Monospace (@weight: normal, @size: 14px, @lineHeight: 1.8) {
+        font-family: @font-family-monospace;   //bootstrap-variables
+        font-weight: @weight;
+        font-size: @size;
+        line-height: @lineHeight;
+    }
+
+    .Heading-Font(@weight: 500, @size: 14px, @lineHeight: 1.8) {
+        font-family: @font-family-sans-serif;   //bootstrap-variables
+        font-weight: @weight;
+        font-size: @size;
+        line-height: @lineHeight;
+    }
+}
+
+
+
+// style attributes for elements with fixed position. Like overlay-menus
+.FixedPositionStyle(@zindex: 0, @top: auto, @right: auto, @bottom: auto, @left: auto, @width: auto, @height: auto) {
+    position: fixed;
+    z-index: @zindex;
+    top: @top;
+    left: @left;
+    bottom: @bottom;
+    right: @right;
+    width: @width;
+    height: @height;
+}
+
+
+.AbsolutePositionStyle(@zindex: 0, @top: auto, @right: auto, @bottom: auto, @left: auto, @width: auto, @height: auto) {
+    position: absolute;
+    z-index: @zindex;
+    top: @top;
+    left: @left;
+    bottom: @bottom;
+    right: @right;
+    width: @width;
+    height: @height;
+}
+
+
+
+// transition mixin
+.TransistionMixin(@property, @duration, @timing) {
+    -webkit-transition: @property @duration @timing;
+    -moz-transition: @property @duration @timing;
+    -o-transition: @property @duration @timing;
+    -ms-transition: @property @duration @timing;
+    transition: @property @duration @timing;
+}
+
+// enable / disable user select for items.
+.UserSelectMixin(@select: none) {
+    -webkit-touch-callout: @select;
+    -webkit-user-select: @select;
+    -khtml-user-select: @select;
+    -moz-user-select: @select;
+    -ms-user-select: @select;
+    user-select: @select;
+}
+
+
+.CenterItem(){
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+}
+
+

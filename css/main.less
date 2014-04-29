@@ -1,0 +1,25 @@
+@import "./../lib/bootstrap/bootstrap-variables.less";
+@import "variables.less";
+
+#scroller{
+    background-color: @app-background-color;
+    position: relative;
+    z-index: 0;
+    top: 40px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    width: auto;
+    height: 100%;
+    .TransistionMixin(background-color, 1.5s, ease);
+}
+
+#scroller.disable {
+        background-color: darken(@app-background-color, 35%);
+       .UserSelectMixin();
+       .TransistionMixin(background-color, 1.5s, ease);
+    }
+    
+    
+    
+ 

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>BlendedShoppingFramework</title>
+
+    <!-- css styles -->
+    <!--<link rel="stylesheet" type="text/css" href="lib/bootstrap-3.1.1/css/bootstrap.css" />-->  
+
+    <!-- less styles -->
+    <link rel="stylesheet" type="text/css" href="lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet/less" type="text/css" href="lib/bootstrap/bootstrap-theme.less" />      
+    <link rel="stylesheet/less" type="text/css" href="lib/bootstrap/bootstrap-variables.less" />   
+
+
+    <link rel="stylesheet/less" type="text/css" href="css/main.less" />   
+    <link rel="stylesheet/less" type="text/css" href="css/variables.less" />   
+    <link rel="stylesheet/less" type="text/css" href="css/startpage.less" /> 
+    <link rel="stylesheet/less" type="text/css" href="css/searchresult.less" /> 
+    <link rel="stylesheet/less" type="text/css" href="css/zz-header-footer.less" /> 
+
+
+    <!-- Phonegap Cordova -->
+    <!--<script src="cordova.js"></script>-->
+    <!--<script src="phonegap.js"></script>-->
+    <!--<script src="barcodescanner.js"></script>-->
+
+
+    <!-- js libraries -->
+    <script type="text/javascript" src="lib/jquery-2.1.0.min.js"></script>   
+    <script type="text/javascript" src="lib/knockout-3.1.0.js"></script>    
+    <script type="text/javascript" src="lib/less-1.4.1.min.js"></script>
+
+
+    <!-- import model -->
+    <!--<script type="text/javascript" src='model/SOME_MODEL'></script>-->
+
+    <!-- import controller -->
+    <script type="text/javascript" src='controller/01-app-state.js'></script>     
+    <script type="text/javascript" src='controller/02-extension.js'></script>   
+    <script type="text/javascript" src='controller/03-header.js'></script>     
+    <script type="text/javascript" src='controller/10-startpage.js'></script>    
+    <script type="text/javascript" src='controller/11-searchresult.js'></script>  
+    
+    <script type="text/javascript" src='controller/zz-app.js'></script>
+
+
+    <script type="text/javascript">
+        var onDeviceReady = function() {
+            console.log("html ready!");
+
+            if (navigator.platform == 'Win32') {
+                app.state.debugOnTablet(false);
+            } else {
+                app.state.debugOnTablet(true);
+            }
+
+            // enable CROSS ORIGIN RESOURCE SHARING
+            // $.support.cors = true;
+            // apply knockout bindings
+            ko.applyBindings(app, $('#head')[0]);
+            app.home('startpage');
+            app.navigateHome();
+        };
+
+        $(document).ready(function() {
+            onDeviceReady();
+        });
+
+        // register to phonegap ready to initialize the app
+        document.addEventListener("deviceready", onDeviceReady, true);
+
+    </script>
+
+</head>
+<body>
+    <section id="head">
+    <!--Header Bar--> 
+    <!-- ************************************************************************* -->
+    <div class="header_bar container" id="header">
+        <div class="row">
+            <div class="header_left col-xs-1" data-bind="click: app.header.optionBtnClick">
+                <div><i class="fa fa-bars"></i></div>
+                <span></span>
+            </div>
+            <div class="header_center col-xs-10">
+                <div data-bind="html: app.headerTitleText"></div>
+            </div>
+            <div class="header_right col-xs-1" data-bind="click: app.header.navigateTo.bind($data, 'startpage')">
+                <div> <i class="fa fa-search"></i></div>
+                <span></span>
+            </div>
+            
+        </div>
+    </div>
+
+
+    <!-- Optionsmenu (slide in) -->
+    <div class="header_option_menu col-xs-10">
+
+        <!-- Profil -->
+        <div class="header_option_profil">
+
+            <!-- nobody is logged in -->
+            <div class="row" data-bind="visible: app.header.nobodyIsLoggedIn">
+                <div class="col-xs-3">
+                    <img data-bind="attr: { src: app.header.loggedInPersonPhoto }" />
+                </div>
+                <div class="col-xs-6">
+                    <form class="row">
+                        <input type="email" placeholder="E-Mail" data-bind="value: app.header.email">
+                        <input type="password" placeholder="Passwort" data-bind="value: app.header.password">
+                    </form>
+                </div>
+                <button class="col-xs-2 btn btn-primary" data-bind="click: app.header.login, html: app.header.loginBtnTxt"></button>
+                <div class="col-xs-1"></div>
+            </div>
+
+            <!-- account is logged in -->
+            <div class="row" data-bind="visible: !app.header.nobodyIsLoggedIn()">
+                <div class="col-xs-3">
+                    <img data-bind="attr: { src: app.header.loggedInPersonPhoto }" />
+                </div>
+                <div class="col-xs-6">
+                    <div class="row loggedInName" data-bind="click: app.header.navigateTo">
+                        <div class="col-xs-12"><span data-bind="html: app.header.loggedInPersonData.FirstName"></span></div>
+                        <div class="col-xs-12"><span data-bind="html: app.header.loggedInPersonData.LastName"></span></div>
+                    </div>
+                </div>
+                <button class="col-xs-2 btn btn-primary" data-bind="click: app.header.logout">Logout</button>
+                <div class="col-xs-1"></div>
+            </div>
+
+            <div class="row noaccount" data-bind="click: app.header.navigateTo.bind($data, 'profilpage'), visible: app.header.nobodyIsLoggedIn">noch kein Account ?...</div>
+
+        </div>
+
+        <!-- app option buttons -->
+        <div data-bind="foreach: app.header.departments">
+            <div class="row col-xs-12 optionListTitle" data-bind="html: departmentName"></div>
+            <div data-bind="foreach: themes">
+                <div class="row header_option_row">
+                    <div class="col-xs-12" data-bind="html: $data"></div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+    <!-- overlay for the gray background -->
+    <div class="grayOverlayBackground"></div>
+
+    <!-- ************************************************************************* -->
+
+
+    <!-- current view begins here -->
+    <section id="content">
+        <section id="wrapper">
+            <div id="scroller">
+                <!-- empty content -->
+            </div>
+        </section>
+    </section>
+    <!-- current view ends here -->
+    
+  </section>
+</body>
+</html>
