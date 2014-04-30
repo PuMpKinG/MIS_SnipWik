@@ -3,9 +3,7 @@
     
     // helper controller
     app.state = new AppState();
-    app.header = new HeaderController();
-    app.header.initController();
-
+    
     app.headerTitleText = "SnipWik";
     
     
@@ -14,9 +12,9 @@
     var currentController = null; 
 
     // the controller for the current view
-    app.setCurrentController = function(controller) {
-        currentController = controller;
-    };
+    app.getCurrentController = function(){
+        return currentController;
+    }
 
     // the viewHistory (stack) maintains the "back" behaviour of the app
     var viewHistory = new Array();
@@ -242,9 +240,12 @@
 
             // set the binding
             ko.applyBindings(currentController, $('#head')[0]);
+            
 
             // info: other view-specific handlers should be registered in the corresponding controller
             console.log("state: loading controller finished.");
+            app.header.refreshCotroller();
+            
         });
 
         // add hash to url

@@ -16,6 +16,8 @@ function StartpageController(){
         self.historyEntries.push("> Suche nach Bla Bla Bla Bla");
         self.historyEntries.push("> Suche nach Bla Bla Bla Bla Bla");
         self.historyEntries.push("> Suche nach Bla Bla Bla Bla Bla ...");
+        
+        
     }
     
 }

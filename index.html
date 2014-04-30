@@ -38,12 +38,15 @@
     <!-- import controller -->
     <script type="text/javascript" src='controller/01-app-state.js'></script>     
     <script type="text/javascript" src='controller/02-extension.js'></script>   
-    <script type="text/javascript" src='controller/03-header.js'></script>     
     <script type="text/javascript" src='controller/10-startpage.js'></script>    
     <script type="text/javascript" src='controller/11-searchresult.js'></script>  
+    <script type="text/javascript" src='controller/12-detailspage.js'></script> 
+    <script type="text/javascript" src='controller/13-editmode.js'></script> 
+    <script type="text/javascript" src='controller/14-history.js'></script> 
     
+     
     <script type="text/javascript" src='controller/zz-app.js'></script>
-
+    <script type="text/javascript" src='controller/zzz-header.js'></script>
 
     <script type="text/javascript">
         var onDeviceReady = function() {
@@ -59,8 +62,10 @@
             // $.support.cors = true;
             // apply knockout bindings
             ko.applyBindings(app, $('#head')[0]);
+            
             app.home('startpage');
             app.navigateHome();
+            
         };
 
         $(document).ready(function() {
@@ -79,18 +84,24 @@
     <!-- ************************************************************************* -->
     <div class="header_bar container" id="header">
         <div class="row">
-            <div class="header_left col-xs-1" data-bind="click: app.header.optionBtnClick">
-                <div><i class="fa fa-bars"></i></div>
-                <span></span>
+            <div class="header_left col-xs-1" data-bind="click: app.header.headerLeftClickEvent">
+                <div><i data-bind="css: app.header.headerLeftIcon"></i></div>
             </div>
-            <div class="header_center col-xs-10">
+            <div class="header_center" data-bind="css: app.header.headerMiddleSpace">
                 <div data-bind="html: app.headerTitleText"></div>
             </div>
-            <div class="header_right col-xs-1" data-bind="click: app.header.navigateTo.bind($data, 'startpage')">
-                <div> <i class="fa fa-search"></i></div>
-                <span></span>
+            
+            <div class="header_right col-xs-1" data-bind="click: app.header.navigateTo.bind($data, 'editmode'), visible: app.header.isPencilVisible">
+                <div> <i class="fa fa-pencil"></i></div>
+            </div>
+                      
+            <div class="header_right col-xs-1" data-bind="click: app.header.navigateTo.bind($data, 'history'), visible: app.header.isHistoryVisible">
+                <div> <i class="fa fa-clock-o"></i></div>
             </div>
             
+            <div class="header_right col-xs-1" data-bind="click: app.header.navigateTo.bind($data, 'startpage'), visible: app.header.isSearchVisible">
+                <div> <i class="fa fa-search"></i></div>
+            </div>
         </div>
     </div>
 
@@ -123,8 +134,8 @@
                 </div>
                 <div class="col-xs-6">
                     <div class="row loggedInName" data-bind="click: app.header.navigateTo">
-                        <div class="col-xs-12"><span data-bind="html: app.header.loggedInPersonData.FirstName"></span></div>
-                        <div class="col-xs-12"><span data-bind="html: app.header.loggedInPersonData.LastName"></span></div>
+                        <div class="col-xs-12"><span data-bind="html: app.header.loggedInPersonData().FirstName"></span></div>
+                        <div class="col-xs-12"><span data-bind="html: app.header.loggedInPersonData().LastName"></span></div>
                     </div>
                 </div>
                 <button class="col-xs-2 btn btn-primary" data-bind="click: app.header.logout">Logout</button>
