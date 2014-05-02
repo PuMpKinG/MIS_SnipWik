@@ -1,5 +1,42 @@
 <section id="wrapper">
     <div id="scroller">
+        <!-- 
         <h1>Hier kommt die Detailansicht hin</h1>
+        -->
+
+        <div class="container searchResult">
+            <div class="title">Quick Sort Algorithmus</div>
+            <div>Erzeugt von: <b>Manfred F.</b></div>
+            <br/>
+            <div class="row">
+                <div class="col-xs-12 rowItem">
+                    <b>Problemstellung</b><br />
+                    Suchen von etwas...
+                </div>
+                <div class="col-xs-12 rowItem">
+                    <b>Beschreibung</b><br />
+                    Quicksort (engl. quick ‚schnell‘ und to sort ‚sortieren‘) ist ein schneller, rekursiver, nicht-stabiler Sortieralgorithmus, der nach dem Prinzip Teile und herrsche (lat. Divide et impera!, engl. divide and conquer) arbeitet.
+                </div>
+                <div class="col-xs-12 rowItem">
+                    <b>Code</b><br />
+                    <pre><code>function quicksort(a)
+if length(a) ≤ 1
+    // an array of zero or one elements is already sorted
+    return a
+select and remove a pivot element pivot from array
+// see Choice of pivot, below
+create empty lists less and greater
+for each x in a
+    if x ≤ pivot then append x to less
+    else append x to greater
+// two recursive calls
+return concatenate(quicksort(less), list(pivot), quicksort(greater))
+					</code></pre>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
 </section>
