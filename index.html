@@ -18,6 +18,9 @@
     <link rel="stylesheet/less" type="text/css" href="css/startpage.less" /> 
     <link rel="stylesheet/less" type="text/css" href="css/searchresult.less" /> 
     <link rel="stylesheet/less" type="text/css" href="css/zz-header-footer.less" /> 
+    
+    <!--Code Highlighting Style-->
+    <link rel="stylesheet" type="text/css" href="lib/highlightJS/styles/vs.css">
 
 
     <!-- Phonegap Cordova -->
@@ -30,6 +33,7 @@
     <script type="text/javascript" src="lib/jquery-2.1.0.min.js"></script>   
     <script type="text/javascript" src="lib/knockout-3.1.0.js"></script>    
     <script type="text/javascript" src="lib/less-1.4.1.min.js"></script>
+    <script type="text/javascript" src="lib/highlightJS/highlight.pack.js"></script>
 
 
     <!-- import model -->
@@ -66,6 +70,7 @@
             app.home('startpage');
             app.navigateHome();
             
+            hljs.initHighlightingOnLoad();
         };
 
         $(document).ready(function() {

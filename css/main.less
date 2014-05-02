@@ -21,5 +21,40 @@
     }
     
     
+ //animation for panel
+.animatedPanel{
+     .panel-body {
+        .TransistionMixin(height, 0.5s, linear);
+        height: 0;
+        overflow: hidden;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+.customDefaultPanel {
+    margin-left: 2%;
+    margin-right: 2%;
+
+    .panel-heading {
+        #Fonts > .SansSerif(bold ,@font-size-base, @line-height-base);
+        background: @header-background-color-base url('http://localhost:8383/SnipWik/css/img/bg01.jpg');
+        color: #fff;
+        
+        button {
+            float: right;
+            margin-left: 7%;
+        }
+
+        i {
+            float: right;
+        }
+    }
+
+    .panel-body {
+      
+    }
+}
+    
     
  
