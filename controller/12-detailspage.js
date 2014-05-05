@@ -25,6 +25,7 @@ function DetailspageController(){
         growDiv.style.height = (wrapper[0].clientHeight + 30) + "px";
         $("#" + id + ".panel-body").css({ "padding-top": "15px", "padding-bottom": "15px" });
     };
+   
 }
 
 

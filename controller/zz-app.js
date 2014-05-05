@@ -4,7 +4,7 @@
     // helper controller
     app.state = new AppState();
     
-    app.headerTitleText = "SnipWik";
+    app.headerTitleText = ko.observable("SnipWik");
     
     
     // layout header data binding

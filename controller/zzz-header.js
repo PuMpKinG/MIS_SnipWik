@@ -76,6 +76,10 @@ function HeaderController() {
         }
     };
 
+    self.openProfilSettings = function(){
+        self.optionBtnClick();
+        app.navigateTo("profilsettings");
+    }
 
     /***********************************************/
     /***        Function                         ***/
@@ -119,6 +123,7 @@ function HeaderController() {
                 self.isPencilVisible(false);
                 self.isHistoryVisible(false);
                 self.isSearchVisible(false);
+                app.headerTitleText("Suchergebnisse");
                 break;
             case "DetailspageController":
                 self.headerLeftIcon("fa fa-chevron-left");
@@ -126,6 +131,7 @@ function HeaderController() {
                 self.isPencilVisible(true);
                 self.isHistoryVisible(true);
                 self.isSearchVisible(true);
+                app.headerTitleText("Details");
                 break;
             case "EditmodeController":
                 self.headerLeftIcon("fa fa-chevron-left");
@@ -133,6 +139,7 @@ function HeaderController() {
                 self.isPencilVisible(false);
                 self.isHistoryVisible(true);
                 self.isSearchVisible(true);
+                app.headerTitleText("Editiermodus");
                 break;
             case "HistoryController":
                 self.headerLeftIcon("fa fa-chevron-left");
@@ -140,6 +147,15 @@ function HeaderController() {
                 self.isPencilVisible(false);
                 self.isHistoryVisible(false);
                 self.isSearchVisible(true);
+                app.headerTitleText("Letzte Änderungen");
+                break;
+            case "ProfilsettingsController":
+                self.headerLeftIcon("fa fa-chevron-left");
+                self.headerMiddleSpace("col-xs-10");
+                self.isPencilVisible(false);
+                self.isHistoryVisible(false);
+                self.isSearchVisible(true);
+                app.headerTitleText("Einstellungen");
                 break;
         }
     }

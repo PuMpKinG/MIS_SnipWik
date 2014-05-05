@@ -16,6 +16,7 @@ function SearchresultController(){
              "title" : "Bubble Sort Algorithmus",
              "description": "Bubblesort (auch Sortieren durch Aufsteigen) ist ein Algorithmus, der vergleichsbasiert eine Liste von Elementen sortiert. Dieses Sortierverfahren arbeitet in-place, sortiert stabil und hat eine Laufzeit von \mathcal{O}(n^2) im schlimmsten (Worst-Case) wie auch im durchschnittlichen Fall (Average-Case)"
          });
+         
      }
 }
 

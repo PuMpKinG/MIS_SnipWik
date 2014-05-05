@@ -17,6 +17,7 @@
     <link rel="stylesheet/less" type="text/css" href="css/variables.less" />   
     <link rel="stylesheet/less" type="text/css" href="css/startpage.less" /> 
     <link rel="stylesheet/less" type="text/css" href="css/searchresult.less" /> 
+    <link rel="stylesheet/less" type="text/css" href="css/profil.less" /> 
     <link rel="stylesheet/less" type="text/css" href="css/zz-header-footer.less" /> 
     
     <!--Code Highlighting Style-->
@@ -47,6 +48,7 @@
     <script type="text/javascript" src='controller/12-detailspage.js'></script> 
     <script type="text/javascript" src='controller/13-editmode.js'></script> 
     <script type="text/javascript" src='controller/14-history.js'></script> 
+    <script type="text/javascript" src='controller/15-profilsettings.js'></script> 
     
      
     <script type="text/javascript" src='controller/zz-app.js'></script>
@@ -134,11 +136,11 @@
 
             <!-- account is logged in -->
             <div class="row" data-bind="visible: !app.header.nobodyIsLoggedIn()">
-                <div class="col-xs-3">
+                <div class="col-xs-3" data-bind="click: app.header.openProfilSettings">
                     <img data-bind="attr: { src: app.header.loggedInPersonPhoto }" />
                 </div>
                 <div class="col-xs-6">
-                    <div class="row loggedInName" data-bind="click: app.header.navigateTo">
+                    <div class="row loggedInName" data-bind="click: app.header.openProfilSettings">
                         <div class="col-xs-12"><span data-bind="html: app.header.loggedInPersonData().FirstName"></span></div>
                         <div class="col-xs-12"><span data-bind="html: app.header.loggedInPersonData().LastName"></span></div>
                     </div>

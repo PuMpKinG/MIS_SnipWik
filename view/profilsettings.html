@@ -1,0 +1,35 @@
+<section id="wrapper">
+    <div id="scroller">
+
+      <div class="container settingStyle">
+          <div class="row title">Benachrichtigungs-Einstellung</div>
+            <div class="row oneOption" data-bind="foreach: deviceType">
+              <div class="col-xs-4" data-bind="html: name"></div>
+              <div class="col-xs-8">
+                  <select class="form-control">
+                    <option value="off">Aus</option>
+                    <option value="less">Nachrichten mit niedriger Priorität</option>
+                    <option value="middle">Nachrichten mit mittlerer Priorität</option>
+                    <option value="much">Nachrichten mit hoher Priorität</option>
+                </select>
+              </div>
+          </div>
+      </div>
+        
+        
+      <div class="container settingStyle">
+          <div class="row title">Prioritäts-Einstellung</div>
+          <div class="row oneOption" data-bind="foreach: messagePrio">
+              <div class="col-xs-4" data-bind="html: name"></div>
+              <div class="col-xs-8">
+                  <select class="form-control">
+                    <option value="less">niedrig</option>
+                    <option value="middle">mittel</option>
+                    <option value="much">hoch</option>
+                </select>
+              </div>
+          </div>
+      </div>  
+      
+    </div>
+</section>
