@@ -60,6 +60,7 @@ function HeaderController() {
         var obsDep = this;
 
         obsDep.departmentName = ko.observable(name);
+        console.log(themes);
         obsDep.themes = ko.observableArray(themes);
     }
 
@@ -68,7 +69,11 @@ function HeaderController() {
     /***********************************************/
     // navigation to next screen, look at configuration path
     self.navigateTo = function(param, data, event) {
-        app.navigateTo(param);
+        if(param == "startpage"){
+            app.navigateTo(param, {reset: true, nohistory: true});
+        } else {
+            app.navigateTo(param);
+        }
     };
 
 
@@ -140,9 +145,10 @@ function HeaderController() {
     }
 
     self.initController = function() {
-        self.departments().clear();
+        self.departments.removeAll();
         self.departments.push(new ObservableDepartment("Abteilung 1", ["Thema 1"]));
-        //self.departments.push(new ObservableDepartment("Abteilung 2", ["Thema 1", "Thema 2"]));
+        console.log("Hier")
+        self.departments.push(new ObservableDepartment("Abteilung 2", ["Thema 2"]));
 
         self.loggedInPersonData({
             FirstName: "Kermit",
