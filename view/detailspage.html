@@ -8,7 +8,7 @@
             
             <!--Problemstellung-->
             <div class="panel panel-default customDefaultPanel animatedPanel">
-                <div class="panel-heading container" data-bind="click: togglePanel.bind($data, 'problem')">
+                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'problem')">
                     <div class="row">
                         <div class="col-xs-10"><span>Problemstellung</span></div>
                         <div class="col-xs-2"><i id="problemIcon" class="fa fa-chevron-down"></i></div>
@@ -23,7 +23,7 @@
 
             <!--Beschreibung-->
             <div class="panel panel-default customDefaultPanel animatedPanel">
-                <div class="panel-heading container" data-bind="click: togglePanel.bind($data, 'description')">
+                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'description')">
                     <div class="row">
                         <div class="col-xs-10"><span>Beschreibung</span></div>
                         <div class="col-xs-2"><i id="descriptionIcon" class="fa fa-chevron-down"></i></div>
@@ -39,7 +39,7 @@
 
             <!--Code-->
             <div class="panel panel-default customDefaultPanel animatedPanel">
-                <div class="panel-heading container" data-bind="click: togglePanel.bind($data, 'pscode')">
+                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'pscode')">
                     <div class="row">
                         <div class="col-xs-10"><span>PseudoCode</span></div>
                         <div class="col-xs-2"><i id="pscodeIcon" class="fa fa-chevron-down"></i></div>
@@ -69,7 +69,7 @@ return concatenate(quicksort(less), list(pivot), quicksort(greater))
 
             <!--Code JAVA-->
             <div class="panel panel-default customDefaultPanel animatedPanel">
-                <div class="panel-heading container" data-bind="click: togglePanel.bind($data, 'javacode')">
+                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'javacode')">
                     <div class="row">
                         <div class="col-xs-10"><span>Code (Java)</span></div>
                         <div class="col-xs-2"><i id="javacodeIcon" class="fa fa-chevron-down"></i></div>

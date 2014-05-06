@@ -1,5 +1,38 @@
 <section id="wrapper">
     <div id="scroller">
-        <h1>Hier kommt die History hin</h1>
+   
+    <div class="TitleTextStyle">Historie zu Snippet "QuickSort"</div>  
+        
+    <div data-bind="foreach: historyEntries">
+        <div class="panel panel-default historyPanel animatedPanel" >
+            <div class="panel-heading container" data-bind="click: togglePanel">
+                <div class="row">
+                    <div class="col-xs-5"><span data-bind="html: description"></span></div>
+                    <div class="col-xs-2"><span data-bind="html: author"></span></div>
+                    <div class="col-xs-3"><span data-bind="html: date"></span></div>
+                    <div class="col-xs-2"><i data-bind="attr: {id: id() + 'Icon'}" class="fa fa-chevron-down"></i></div>
+                </div>
+            </div>
+            <div class="panel-body" data-bind="attr: {id: id() + 'Panel'}">
+                <div class="measureWrapper">
+                     <pre><code>function quicksort(a)
+if length(a) ≤ 1
+    // an array of zero or one elements is already sorted
+    return a
+select and remove a pivot element pivot from array
+// see Choice of pivot, below
+create empty lists less and greater
+for each x in a
+    if x ≤ pivot then append x to less
+    else append x to greater
+// two recursive calls
+return concatenate(quicksort(less), list(pivot), quicksort(greater))
+					</code></pre>
+                </div>
+            </div>
+        </div>
     </div>
+
+ </div>
+
 </section>
