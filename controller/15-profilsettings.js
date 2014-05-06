@@ -10,7 +10,7 @@ function ProfilsettingsController(){
            self.deviceType.push({"name": "Pop-Up"});
            
            self.messagePrio.push({"name": "Nachrichten zu eigenen Artikeln"});
-           self.messagePrio.push({"name": "Narichten über Updates"});
+           self.messagePrio.push({"name": "Nachrichten über Updates"});
            self.messagePrio.push({"name": "Nachrichten wegen Bugs"});
            self.messagePrio.push({"name": "Nachrichten von anderen Abteilungen"});
     }
