@@ -1,5 +1,158 @@
 <section id="wrapper">
     <div id="scroller">
-        <h1>Hier kommt die Die Ansicht zum editieren hin</h1>
+        <div class="container editPage">
+            <!-- ToDo: Ugly C&P  -->
+            <div class="panel panel-default customDefaultPanel">
+                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'action')">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <span>
+                                <input class="btn btn-primary" type="submit" data-bind="click: app.header.headerLeftClickEvent" value="Speichern">
+                                <input class="btn" type="submit" data-bind="click: app.header.headerLeftClickEvent" value="Abbrechen">
+                            </span>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel panel-default customDefaultPanel">
+                <div class="panel-heading container" >
+                    <div class="measureWrapper">
+                        <input type="text" class="title col-xs-12" value="Quick Sort Algorithmus" />
+                    </div>
+                </div>            
+            </div>
+            
+            <!--Problemstellung-->
+            <div class="panel panel-default customDefaultPanel">
+                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'problem')">
+                    <div class="row">
+                        <div class="col-xs-10"><span>Problemstellung</span></div>                        
+                    </div>
+                </div>
+                <div class="panel-body" id="problemPanel">
+                    <div class="measureWrapper">
+                        <textarea class="col-xs-12">Suchen von etwas...</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!--Beschreibung-->
+            <div class="panel panel-default customDefaultPanel">
+                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'description')">
+                    <div class="row">
+                        <div class="col-xs-10"><span>Beschreibung</span></div>
+                    </div>
+                </div>
+                <div class="panel-body" id="descriptionPanel">
+                    <div class="measureWrapper">
+                        <textarea class="col-xs-12">
+Quicksort (engl. quick ‚schnell‘ und to sort ‚sortieren‘) ist ein schneller, rekursiver, nicht-stabiler Sortieralgorithmus, der nach dem Prinzip Teile und herrsche (lat. Divide et impera!, engl. divide and conquer) arbeitet.
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!--Code-->
+            <div class="panel panel-default customDefaultPanel">
+                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'pscode')">
+                    <div class="row">
+                        <div class="col-xs-10"><span>PseudoCode</span></div>
+                    </div>
+                </div>
+                <div class="panel-body" id="pscodePanel">
+                    <div class="measureWrapper">
+                        <textarea class="col-xs-12">function quicksort(a)
+if length(a) ≤ 1
+    // an array of zero or one elements is already sorted
+    return a
+select and remove a pivot element pivot from array
+// see Choice of pivot, below
+create empty lists less and greater
+for each x in a
+    if x ≤ pivot then append x to less
+    else append x to greater
+// two recursive calls
+return concatenate(quicksort(less), list(pivot), quicksort(greater))
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Code JAVA-->
+            <div class="panel panel-default customDefaultPanel">
+                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'javacode')">
+                    <div class="row">
+                        <div class="col-xs-10"><span>Code (Java)</span></div>
+                    </div>
+                </div>
+                <div class="panel-body" id="javacodePanel">
+                    <div class="measureWrapper">
+                        <textarea class="col-xs-12">
+import java.util.Random;
+
+public class QuickSort {
+   public static void sortiere(int x[]) {
+      qSort(x, 0, x.length-1);
+   }
+    
+   public static void qSort(int x[], int links, int rechts) {
+      if (links < rechts) {
+         int i = partition(x,links,rechts);
+         qSort(x,links,i-1);
+         qSort(x,i+1,rechts);
+      }
+   }
+    
+   public static int partition(int x[], int links, int rechts) {
+      int pivot, i, j, help;
+      pivot = x[rechts];               
+      i     = links;
+      j     = rechts-1;
+      while(i<=j) {
+         if (x[i] > pivot) {     
+            // tausche x[i] und x[j]
+            help = x[i]; 
+            x[i] = x[j]; 
+            x[j] = help;                             
+            j--;
+         } else i++;            
+      }
+      // tausche x[i] und x[rechts]
+      help      = x[i];
+      x[i]      = x[rechts];
+      x[rechts] = help;
+        
+      return i;
+   }
+    
+   public static void main(String[] args) {
+      int[] liste = {0,9,4,6,2,8,5,1,7,3};
+      sortiere(liste);
+      for (int i=0; i<=liste.length; i++) 
+         System.out.print(liste[i]+" ");         
+   }    
+}
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ToDo: Ugly C&P  -->
+            <div class="panel panel-default customDefaultPanel">
+                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'action')">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <span>
+                                <input class="btn btn-primary" type="submit" data-bind="click: app.header.headerLeftClickEvent" value="Speichern" />
+                                <input class="btn" type="submit" data-bind="click: app.header.headerLeftClickEvent" value="Abbrechen" />
+                            </span>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
