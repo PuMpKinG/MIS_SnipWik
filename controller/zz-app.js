@@ -1,20 +1,24 @@
 ﻿function App() {
     var app = this;
-    
+
     // helper controller
     app.state = new AppState();
-    
+    app.db;
+
     app.headerTitleText = ko.observable("SnipWik");
-    
-    
+
+    app.initDb = function() {
+        app.db = DB.init();
+    };
+
     // layout header data binding
     app.canNavigateBack = ko.observable(false);
-    var currentController = null; 
+    var currentController = null;
 
     // the controller for the current view
-    app.getCurrentController = function(){
+    app.getCurrentController = function() {
         return currentController;
-    }
+    };
 
     // the viewHistory (stack) maintains the "back" behaviour of the app
     var viewHistory = new Array();
@@ -26,7 +30,7 @@
         var thisEntry = this;
         var slash = "/"; // just to get not confused with "/" or "\"
         var slashIndex = viewpath.indexOf(slash);
-        var hasSubfolder = viewpath.contains(slash); 
+        var hasSubfolder = viewpath.contains(slash);
 
         // properties
         thisEntry.id = viewpath;
@@ -36,18 +40,19 @@
 
         // Controllername: "order/my-view" -> OrdnerMyViewController
         thisEntry.controller = thisEntry.name.toCamel().ucfirst() + "Controller";
-        if (hasSubfolder) thisEntry.controller = thisEntry.subfolder.ucfirst() + thisEntry.controller;
+        if (hasSubfolder)
+            thisEntry.controller = thisEntry.subfolder.ucfirst() + thisEntry.controller;
 
         // methods
-        thisEntry.createController = function () {
+        thisEntry.createController = function() {
             try {
                 var controller = eval("new " + thisEntry.controller + "()");
-            } catch(e) {
+            } catch (e) {
                 console.log("error: on creating controller: " + e);
                 console.log(printStackTrace());
                 return null;
             }
-            
+
             return controller;
         };
 
@@ -58,17 +63,17 @@
     };
 
     // the current view is always on top of the navigation stack
-    app.currentView = function () {
+    app.currentView = function() {
         return viewHistory.last(); // could be undefined
     };
 
     // the last view is always the last second postition of the stack, if applicable
-    app.lastView = function () {
+    app.lastView = function() {
         return viewHistory[viewHistory.length - 2]; // could be null
     };
 
     // we can navigate backwards, unless we are in the very first view 
-    var updateBackNavigation = function () {
+    var updateBackNavigation = function() {
         //update back button visibility
         app.canNavigateBack(app.lastView() !== undefined);
 
@@ -87,12 +92,12 @@
         return wasNavigatingBack;
     };
 
-    app.navigateBackHandler = function () {
+    app.navigateBackHandler = function() {
         app.navigateBack();
     };
 
     // "back" function of the app
-    app.navigateBack = function () {
+    app.navigateBack = function() {
         if (!app.canNavigateBack()) {
             // this function cannot be called, if its not possible
             console.log("error: invalid method call, cannot navigate back");
@@ -102,18 +107,18 @@
         if (!app.canNavigate()) {
             return;
         }
-        
+
         // remove ("pop") current view and navigate (backwards) to the new current view
         viewHistory.pop();
         //alert(app.currentView().file);
-        app.navigateTo(app.currentView().id, { backwards: true });
+        app.navigateTo(app.currentView().id, {backwards : true});
     };
 
 
     // get/set home view
     var homeViewEntry = null;
 
-    app.home = function (viewPath) {
+    app.home = function(viewPath) {
         if (typeof viewPath !== 'undefined') {
             homeViewEntry = new ViewHistoryEntry(viewPath);
         }
@@ -121,9 +126,9 @@
         return homeViewEntry;
     };
 
-   
+
     // "home" navigation
-    app.navigateHome = function () {
+    app.navigateHome = function() {
         var home = app.home();
         if (home) {
             viewHistory.clear();
@@ -137,7 +142,7 @@
     };
 
     // goes back to a specific screen
-    app.navigateBackTo = function (viewpath, /*optional*/ doNotExecute) {
+    app.navigateBackTo = function(viewpath, /*optional*/ doNotExecute) {
         while (app.lastView() && (app.lastView().id != viewpath)) {
             console.log('remove navigation history entry: ' + app.lastView().file);
             viewHistory.pop();
@@ -156,7 +161,7 @@
     };
 
 
-    app.canNavigate = function (backwards, viewPath) {
+    app.canNavigate = function(backwards, viewPath) {
         var okay = true;
 
         if (currentController != null && currentController.canNavigate) {
@@ -172,20 +177,21 @@
     //              backwards: true/false       true=used for backwards navigation only
     //              nohistory: true/false       true=next page is not move on top of the page history stack
     //          }
-    app.navigateTo = function (viewPath, /*optional*/options) {
+    app.navigateTo = function(viewPath, /*optional*/options) {
         var self = this;
         console.log("call navigate to");
         var innerOptions = options; // BECAUSE THE FUCKING OPTIONS CANNOT BE SET?? WHY ??? 
 
         // default options
         if (!innerOptions) {
-            innerOptions = { backwards: false, nohistory: false, reset: false, doNotExecute: false };
+            innerOptions = {backwards : false, nohistory : false, reset : false, doNotExecute : false};
         }
 
         // only test on forward navigation, if the controller allows it
         if (!innerOptions.backwards) {
             // DO NOT concatenate if expressions here
-            if (!app.canNavigate(innerOptions.backwards, viewPath)) return;
+            if (!app.canNavigate(innerOptions.backwards, viewPath))
+                return;
         }
 
         // remember, navigationdirection
@@ -210,11 +216,12 @@
         console.log("state: loading view " + viewEntry.file + "...");
 
         // replace content with screen2 page
-        $('#content').load(viewEntry.file, function () {
+        $('#content').load(viewEntry.file, function() {
             console.log("state: view loaded.");
-            
-             //export data, if export function exits
-            if (currentController && currentController.exportData) currentController.exportData();
+
+            //export data, if export function exits
+            if (currentController && currentController.exportData)
+                currentController.exportData();
 
             // evaluate controller (app.title should be updated by the controller of the current view)
             console.log("state: creating controller " + viewEntry.controller + "...");
@@ -232,26 +239,27 @@
                 viewHistory.push(viewEntry);
                 //console.log("Navigation History Stack: " + JSON.stringify(viewHistory));
             }
-            
-            if (currentController && currentController.initController) currentController.initController();
+
+            if (currentController && currentController.initController)
+                currentController.initController();
 
             // now update state of back button
             updateBackNavigation();
 
             // set the binding
             ko.applyBindings(currentController, $('#head')[0]);
-            
+
 
             // info: other view-specific handlers should be registered in the corresponding controller
             console.log("state: loading controller finished.");
             app.header.refreshCotroller();
-            
+
         });
 
         // add hash to url
         //setLocationHash('#' + viewEntry.id);
 
-       // if (!wasNavigatingBack) checkAndInitUsedTemplates();
+        // if (!wasNavigatingBack) checkAndInitUsedTemplates();
     };
 
 
@@ -271,19 +279,19 @@
     function setLocationHash(str) {
         window.location.hash = str;
     }
-    
-    
-    $(document).ready(function () {
-       // do something on startup
+
+
+    $(document).ready(function() {
+        // do something on startup
     });
-    
-    
-    app.togglePanel = function (data, event) {
+
+
+    app.togglePanel = function(data, event) {
         expandOrCollapseDiv(data + "Panel");
         $("#" + data + "Icon").toggleClass("fa-chevron-up fa-chevron-down");
     };
 
-    var expandOrCollapseDiv = function (id) {
+    var expandOrCollapseDiv = function(id) {
         var growDiv = document.getElementById(id);
         if (growDiv.clientHeight) {
             collapse(growDiv, id);
@@ -291,26 +299,26 @@
             expand(growDiv, id);
         }
     };
-    
-    app.expandDiv = function(id){
+
+    app.expandDiv = function(id) {
         var growDiv = document.getElementById(id);
         expand(growDiv, id);
     };
-    
-    app.collapseDiv = function(id){
+
+    app.collapseDiv = function(id) {
         var growDiv = document.getElementById(id);
         collapse(growDiv, id);
     };
 
-    var collapse = function (growDiv, id) {
+    var collapse = function(growDiv, id) {
         growDiv.style.height = 0;
-        $("#" + id + ".panel-body").css({ "padding-top": "0", "padding-bottom": "0" });
+        $("#" + id + ".panel-body").css({"padding-top" : "0", "padding-bottom" : "0"});
     };
 
-    var expand = function (growDiv, id) {
+    var expand = function(growDiv, id) {
         var wrapper = $("#" + id).find(".measureWrapper");
         growDiv.style.height = (wrapper[0].clientHeight + 30) + "px";
-        $("#" + id + ".panel-body").css({ "padding-top": "15px", "padding-bottom": "15px" });
+        $("#" + id + ".panel-body").css({"padding-top" : "15px", "padding-bottom" : "15px"});
     };
 }
 
