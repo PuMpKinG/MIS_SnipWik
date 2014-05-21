@@ -52,7 +52,7 @@
     <script type="text/javascript" src='controller/14-history.js'></script> 
     <script type="text/javascript" src='controller/15-profilsettings.js'></script> 
     
-     
+    <script type="text/javascript" src='controller/db.js'></script>
     <script type="text/javascript" src='controller/zz-app.js'></script>
     <script type="text/javascript" src='controller/zzz-header.js'></script>
 
@@ -71,6 +71,7 @@
             // apply knockout bindings
             ko.applyBindings(app, $('#head')[0]);
             
+            app.initDb();
             app.home('startpage');
             app.navigateHome();
             

@@ -4,25 +4,15 @@
         <div class="container searchResult">
             <div class="row title">Suchergebnisse zu: "Quick Sort":</div>
             <div class="" data-bind="foreach: searchresult">
-                <div class="row rowItem" data-bind="click: $parent.navigateToDetails">
+                <div class="row rowItem" data-bind="click: function(solutionId) { $parent.navigateToDetails('param1', solutionId) }">
                     <div class="col-xs-10">
                         <div class="itemTitle" data-bind="html: title"></div>
                         <div class="itemText" data-bind="html: description"></div>
                     </div>
                     <div class="col-xs-2 rowicon"><i class="fa fa-chevron-right"></i></div>
                 </div>
-                <!--                <div class="col-xs-12 rowItem" data-bind="click: navigateToDetails">
-                                    <b>Quick Sort Algorithmus</b><br />
-                                    Quicksort (engl. quick ‚schnell‘ und to sort ‚sortieren‘) ist ein schneller, rekursiver, nicht-stabiler Sortieralgorithmus, der nach dem Prinzip Teile und herrsche (lat. Divide et impera!, engl. divide and conquer) arbeitet.
-                                </div>
-                                <div class="col-xs-12 rowItem">
-                                    <b>Bubble Sort Algorithmus</b><br />
-                                    Bubblesort (auch Sortieren durch Aufsteigen) ist ein Algorithmus, der vergleichsbasiert eine Liste von Elementen sortiert. Dieses Sortierverfahren arbeitet in-place, sortiert stabil und hat eine Laufzeit von \mathcal{O}(n^2) im schlimmsten (Worst-Case) wie auch im durchschnittlichen Fall (Average-Case)
-                                </div>-->
-
             </div>
         </div>         
-
-
+        
     </div>
 </section>
