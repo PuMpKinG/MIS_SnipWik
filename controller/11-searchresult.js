@@ -3,8 +3,8 @@ function SearchresultController() {
 
     self.searchresult = ko.observableArray();
 
-    self.navigateToDetails = function(id) {
-        // FIXME: id an detailspage initController übergeben!!!
+    self.navigateToDetails = function(solutionId) {
+        app.state.solutionId(solutionId)
         app.navigateTo("detailspage");
     };
 
