@@ -9,7 +9,7 @@ function SearchresultController() {
     };
 
     self.initController = function() {
-        app.db.query("SELECT * FROM solution ORDER BY id", function(results) {
+        app.db.query("SELECT * FROM solution ORDER BY id", [], function(results) {
             var len = results.rows.length;
             for (var rowIndex = 0; rowIndex < len; rowIndex++) {
                 var row = results.rows.item(rowIndex);

@@ -4,172 +4,38 @@
         <div class="container searchResult">
             <div class="title" data-bind="html: name"></div>
             <div>Erzeugt von: <b>Manfred F.</b></div>
-            <br/>
+
+            <div class="accordion" id="accordion2" data-bind="foreach: details">
+                <div class="panel panel-default customDefaultPanel animatedPanel">
+                    <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'problem')">
+                        <div class="row">
+                            <div class="col-xs-10" data-bind="html: name"></div>
+                            <div class="col-xs-2"><i id="problemIcon" class="fa fa-chevron-down"></i></div>
+                        </div>
+                    </div>
+                    <div class="panel-body" id="problemPanel">
+                        <div class="measureWrapper">
+                            <!-- ko if: type() === 'CODE' -->
+                            <div>
+                                <pre><code data-bind="html: content"></code></pre>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: type() === 'TEXT' -->
+                            <div data-bind="html: content"></div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            <!--Problemstellung-->
-            <div class="panel panel-default customDefaultPanel animatedPanel">
-                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'problem')">
-                    <div class="row">
-                        <div class="col-xs-10"><span>Problemstellung</span></div>
-                        <div class="col-xs-2"><i id="problemIcon" class="fa fa-chevron-down"></i></div>
-                    </div>
-                </div>
-                <div class="panel-body" id="problemPanel">
-                    <div class="measureWrapper">
-                        <div>Suchen von etwas...</div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Beschreibung-->
-            <div class="panel panel-default customDefaultPanel animatedPanel">
-                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'description')">
-                    <div class="row">
-                        <div class="col-xs-10"><span>Beschreibung</span></div>
-                        <div class="col-xs-2"><i id="descriptionIcon" class="fa fa-chevron-down"></i></div>
-                    </div>
-                </div>
-                <div class="panel-body" id="descriptionPanel">
-                    <div class="measureWrapper">
-                        <div>Quicksort (engl. quick ‚schnell‘ und to sort ‚sortieren‘) ist ein schneller, rekursiver, nicht-stabiler Sortieralgorithmus, der nach dem Prinzip Teile und herrsche (lat. Divide et impera!, engl. divide and conquer) arbeitet.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Code-->
-            <div class="panel panel-default customDefaultPanel animatedPanel">
-                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'pscode')">
-                    <div class="row">
-                        <div class="col-xs-10"><span>PseudoCode</span></div>
-                        <div class="col-xs-2"><i id="pscodeIcon" class="fa fa-chevron-down"></i></div>
-                    </div>
-                </div>
-                <div class="panel-body" id="pscodePanel">
-                    <div class="measureWrapper">
-                        <div>
-                            <pre><code>function quicksort(a)
-if length(a) ≤ 1
-    // an array of zero or one elements is already sorted
-    return a
-select and remove a pivot element pivot from array
-// see Choice of pivot, below
-create empty lists less and greater
-for each x in a
-    if x ≤ pivot then append x to less
-    else append x to greater
-// two recursive calls
-return concatenate(quicksort(less), list(pivot), quicksort(greater))
-					</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--Code JAVA-->
-            <div class="panel panel-default customDefaultPanel animatedPanel">
-                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'javacode')">
-                    <div class="row">
-                        <div class="col-xs-10"><span>Code (Java)</span></div>
-                        <div class="col-xs-2"><i id="javacodeIcon" class="fa fa-chevron-down"></i></div>
-                    </div>
-                </div>
-                <div class="panel-body" id="javacodePanel">
-                    <div class="measureWrapper">
-                        <div>
-                            <pre><code>
-import java.util.Random;
-
-public class QuickSort {
-   public static void sortiere(int x[]) {
-      qSort(x, 0, x.length-1);
-   }
-    
-   public static void qSort(int x[], int links, int rechts) {
-      if (links < rechts) {
-         int i = partition(x,links,rechts);
-         qSort(x,links,i-1);
-         qSort(x,i+1,rechts);
-      }
-   }
-    
-   public static int partition(int x[], int links, int rechts) {
-      int pivot, i, j, help;
-      pivot = x[rechts];               
-      i     = links;
-      j     = rechts-1;
-      while(i<=j) {
-         if (x[i] > pivot) {     
-            // tausche x[i] und x[j]
-            help = x[i]; 
-            x[i] = x[j]; 
-            x[j] = help;                             
-            j--;
-         } else i++;            
-      }
-      // tausche x[i] und x[rechts]
-      help      = x[i];
-      x[i]      = x[rechts];
-      x[rechts] = help;
-        
-      return i;
-   }
-    
-   public static void main(String[] args) {
-      int[] liste = {0,9,4,6,2,8,5,1,7,3};
-      sortiere(liste);
-      for (int i=0; i<=liste.length; i++) 
-         System.out.print(liste[i]+" ");         
-   }    
-}
-					</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+        
         <!--Code-highlight init-->
         <script>
-            $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+            $('pre code').each(function(i, e) {
+                hljs.highlightBlock(e);
+            });
         </script>
 
-</div>
+    </div>
 </section>
-
-
-<!-- 
-      <h1>Hier kommt die Detailansicht hin</h1>
--->
-<!--
-        <div class="container searchResult">
-            <div class="title">Quick Sort Algorithmus</div>
-            <div>Erzeugt von: <b>Manfred F.</b></div>
-            <br/>
-            <div class="row">
-                <div class="col-xs-12 rowItem">
-                    <b>Problemstellung</b><br />
-                    Suchen von etwas...
-                </div>
-                <div class="col-xs-12 rowItem">
-                    <b>Beschreibung</b><br />
-                    Quicksort (engl. quick ‚schnell‘ und to sort ‚sortieren‘) ist ein schneller, rekursiver, nicht-stabiler Sortieralgorithmus, der nach dem Prinzip Teile und herrsche (lat. Divide et impera!, engl. divide and conquer) arbeitet.
-                </div>
-                <div class="col-xs-12 rowItem">
-                    <b>Code</b><br />
-                    <pre><code>function quicksort(a)
-if length(a) ≤ 1
-    // an array of zero or one elements is already sorted
-    return a
-select and remove a pivot element pivot from array
-// see Choice of pivot, below
-create empty lists less and greater
-for each x in a
-    if x ≤ pivot then append x to less
-    else append x to greater
-// two recursive calls
-return concatenate(quicksort(less), list(pivot), quicksort(greater))
-                                        </code></pre>
-                </div>
-            </div>
-        </div>-->
