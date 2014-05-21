@@ -17,7 +17,7 @@ function DetailspageController() {
             var len = results.rows.length;
             for (var rowIndex = 0; rowIndex < len; rowIndex++) {
                 var row = results.rows.item(rowIndex);
-                self.solution.name = row.name;
+                self.solution(row.name);
             }
         });
     }
