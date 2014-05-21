@@ -4,9 +4,8 @@ function DetailspageController() {
     self.solution = ko.observable();
     self.details = ko.observableArray();
 
-    // FIXME: id aus searchresult page übergeben
-    self.initController = function(solutionId) {
-        var solutionId = 1;
+    self.initController = function() {
+        var solutionId = app.state.solutionId();
         var query = "SELECT sd.content, sdt.type_name, sdt.type FROM solution_detail sd INNER JOIN solution_detail_type sdt ON sdt.id = sd.detail_type_id WHERE sd.solution_id = ?";
         app.db.query(query, [solutionId], function(results) {
             console.log("TEST");
