@@ -4,7 +4,7 @@ function SearchresultController() {
     self.searchresult = ko.observableArray();
 
     self.navigateToDetails = function(solutionId) {
-        app.state.solutionId(solutionId)
+        app.state.solutionId(solutionId);
         app.navigateTo("detailspage");
     };
 

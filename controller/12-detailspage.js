@@ -6,16 +6,32 @@ function DetailspageController() {
 
     self.initController = function() {
         var solutionId = app.state.solutionId();
-        var query = "SELECT sd.content, sdt.type_name, sdt.type FROM solution_detail sd INNER JOIN solution_detail_type sdt ON sdt.id = sd.detail_type_id WHERE sd.solution_id = ?";
-        app.db.query(query, [solutionId], function(results) {
-            console.log("TEST");
+
+        loadSolution(solutionId);
+        loadDetails(solutionId);
+    };
+
+    function loadSolution(solutionId) {
+        var solutionQuery = "SELECT * FROM solution WHERE id = ?";
+        app.db.query(solutionQuery, [solutionId], function(results) {
             var len = results.rows.length;
             for (var rowIndex = 0; rowIndex < len; rowIndex++) {
                 var row = results.rows.item(rowIndex);
-                self.details.push({"content" : row.content, "title" : row.type_name, "type" : row.type});
+                self.solution.name = row.name;
             }
         });
-    };
+    }
+
+    function loadDetails(solutionId) {
+        var detailsQuery = "SELECT sd.id, sd.content, sdt.id as typeId, sdt.type_name, sdt.type FROM solution_detail sd INNER JOIN solution_detail_type sdt ON sdt.id = sd.detail_type_id WHERE sd.solution_id = ?";
+        app.db.query(detailsQuery, [solutionId], function(results) {
+            var len = results.rows.length;
+            for (var rowIndex = 0; rowIndex < len; rowIndex++) {
+                var row = results.rows.item(rowIndex);
+                self.details.push({"itemId" : row.id, "content" : row.content, "typeId" : row.typeId, "name" : row.type_name, "type" : row.type});
+            }
+        });
+    }
 }
 
 

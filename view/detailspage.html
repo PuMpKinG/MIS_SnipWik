@@ -2,25 +2,25 @@
     <div id="scroller">
 
         <div class="container searchResult">
-            <div class="title" data-bind="html: name"></div>
-            <div>Erzeugt von: <b>Manfred F.</b></div>
+            <div class="title" data-bind="html: solution.name()"></div>
+            <div style="margin-bottom: 10px">Erzeugt von: <b>Manfred F.</b></div>
 
-            <div class="accordion" id="accordion2" data-bind="foreach: details">
+            <div class="panel-group" id="accordion" data-bind="foreach: details">
                 <div class="panel panel-default customDefaultPanel animatedPanel">
-                    <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'problem')">
+                    <div class="panel-heading" data-bind="click: app.togglePanel.bind($data, typeId)">
                         <div class="row">
                             <div class="col-xs-10" data-bind="html: name"></div>
-                            <div class="col-xs-2"><i id="problemIcon" class="fa fa-chevron-down"></i></div>
+                            <div class="col-xs-2"><i data-bind="attr: {id: typeId + 'Icon'}" class="fa fa-chevron-down"></i></div>
                         </div>
                     </div>
-                    <div class="panel-body" id="problemPanel">
+                    <div class="panel-body" data-bind="attr: {id: typeId + 'Panel'}">
                         <div class="measureWrapper">
-                            <!-- ko if: type() === 'CODE' -->
+                            <!-- ko if: type === 'CODE' -->
                             <div>
                                 <pre><code data-bind="html: content"></code></pre>
                             </div>
                             <!-- /ko -->
-                            <!-- ko if: type() === 'TEXT' -->
+                            <!-- ko if: type === 'TEXT' -->
                             <div data-bind="html: content"></div>
                             <!-- /ko -->
                         </div>

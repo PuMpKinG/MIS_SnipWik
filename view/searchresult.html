@@ -4,7 +4,7 @@
         <div class="container searchResult">
             <div class="row title">Suchergebnisse zu: "Quick Sort":</div>
             <div class="" data-bind="foreach: searchresult">
-                <div class="row rowItem" data-bind="click: function(solutionId) { $parent.navigateToDetails('param1', solutionId) }">
+                <div class="row rowItem" data-bind="click: $parent.navigateToDetails.bind($data, solutionId)">
                     <div class="col-xs-10">
                         <div class="itemTitle" data-bind="html: title"></div>
                         <div class="itemText" data-bind="html: description"></div>
