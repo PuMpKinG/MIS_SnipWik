@@ -3,27 +3,43 @@
         <div class="container editPage">
             <!-- ToDo: Ugly C&P  -->
             <div class="panel panel-default customDefaultPanel">
-                <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'action')">
+                <div class="panel-heading container">
                     <div class="row">
                         <div class="col-xs-10">
                             <span>
-                                <input class="btn btn-primary" type="submit" data-bind="click: app.header.headerLeftClickEvent" value="Speichern">
+                                <input class="btn btn-primary" type="submit" data-bind="click: savData" value="Speichern">
                                 <input class="btn" type="submit" data-bind="click: app.header.headerLeftClickEvent" value="Abbrechen">
                             </span>
                         </div>                        
                     </div>
                 </div>
             </div>
-            
+
             <div class="panel panel-default customDefaultPanel">
                 <div class="panel-heading container" >
                     <div class="measureWrapper">
-                        <input type="text" class="title col-xs-12" value="Quick Sort Algorithmus" />
+                        <input type="text" class="title col-xs-12" data-bind="value: solution" />
                     </div>
                 </div>            
             </div>
+
+            <div class="panel-group" id="accordion" data-bind="foreach: details">
+                <div class="panel panel-default customDefaultPanel animatedPanel">
+                    <div class="panel-heading" data-bind="click: app.togglePanel.bind($data, typeId)">
+                        <div class="row">
+                            <div class="col-xs-10" data-bind="html: name"></div>
+                            <div class="col-xs-2"><i data-bind="attr: {id: typeId + 'Icon'}" class="fa fa-chevron-down"></i></div>
+                        </div>
+                    </div>
+                    <div class="panel-body" data-bind="attr: {id: typeId + 'Panel'}">
+                        <div class="measureWrapper">
+                            <textarea class="col-xs-12" data-bind="html: content"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            <!--Problemstellung-->
+            <!--
             <div class="panel panel-default customDefaultPanel">
                 <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'problem')">
                     <div class="row">
@@ -37,7 +53,6 @@
                 </div>
             </div>
 
-            <!--Beschreibung-->
             <div class="panel panel-default customDefaultPanel">
                 <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'description')">
                     <div class="row">
@@ -53,7 +68,6 @@ Quicksort (engl. quick ‚schnell‘ und to sort ‚sortieren‘) ist ein schnel
                 </div>
             </div>
 
-            <!--Code-->
             <div class="panel panel-default customDefaultPanel">
                 <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'pscode')">
                     <div class="row">
@@ -80,7 +94,6 @@ return concatenate(quicksort(less), list(pivot), quicksort(greater))
             </div>
 
 
-            <!--Code JAVA-->
             <div class="panel panel-default customDefaultPanel">
                 <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'javacode')">
                     <div class="row">
@@ -139,7 +152,6 @@ public class QuickSort {
                 </div>
             </div>
 
-            <!-- ToDo: Ugly C&P  -->
             <div class="panel panel-default customDefaultPanel">
                 <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'action')">
                     <div class="row">
@@ -152,6 +164,7 @@ public class QuickSort {
                     </div>
                 </div>
             </div>
+            -->
         </div>
     </div>
 </section>

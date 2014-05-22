@@ -3,12 +3,15 @@ function DetailspageController() {
 
     self.solution = ko.observable();
     self.details = ko.observableArray();
-
+    
     self.initController = function() {
         var solutionId = app.state.solutionId();
-
+        
         loadSolution(solutionId);
         loadDetails(solutionId);
+        
+        app.state.editSolution = self.solution;
+        app.state.editDetails = self.details;
     };
 
     function loadSolution(solutionId) {

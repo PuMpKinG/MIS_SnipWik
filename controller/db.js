@@ -43,17 +43,24 @@ var DB = (function() {
         console.log("error processing SQL: (message: " + error.message + ", code: " + error.code + ")");
     }
 
+    function nullCB() {
+    }
+
     var query = function(query, params, callback) {
         self.db.transaction(function(tx) {
-            tx.executeSql(query, params, function(tx, results) {
-                callback(results);
-            }, errorCB);
+            if (callback) {
+                tx.executeSql(query, params, function(tx, results) {
+                    callback(results);
+                }, errorCB);
+            } else {
+                tx.executeSql(query, params, nullCB, errorCB);
+            }
         }, errorCB);
     };
 
     return {
-        init : initialize,
-        query : query
+        init: initialize,
+        query: query
     };
 })();
 
