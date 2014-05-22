@@ -47,7 +47,7 @@ var DB = (function() {
     }
 
     var query = function(queryString, params, callback) {
-        console.log("executing SQL: " + queryString + " (" + new Date() + ")");
+        console.log("executing SQL: " + queryString + ", parameter: " + params + " (" + new Date() + ")");
 
         self.db.transaction(function(tx) {
             if (callback) {

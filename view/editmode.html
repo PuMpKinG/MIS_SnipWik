@@ -33,12 +33,26 @@
                     </div>
                     <div class="panel-body" data-bind="attr: {id: typeId + 'Panel'}">
                         <div class="measureWrapper">
-                            <textarea class="col-xs-12" data-bind="html: content"></textarea>
+                            <textarea class="col-xs-12" data-bind="value: content"></textarea>
                         </div>
                     </div>
                 </div>
             </div>
             
+            <div class="panel-group" style="margin-top: 20px">
+                <div class="panel panel-default customDefaultPanel">
+                    <div class="panel-heading container">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <span>
+                                    <input class="btn btn-primary" type="submit" data-bind="click: savData" value="Speichern" />
+                                    <input class="btn" type="submit" data-bind="click: app.header.headerLeftClickEvent" value="Abbrechen" />
+                                </span>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!--
             <div class="panel panel-default customDefaultPanel">
                 <div class="panel-heading container" data-bind="click: app.togglePanel.bind($data, 'problem')">

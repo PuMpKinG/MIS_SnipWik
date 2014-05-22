@@ -26,6 +26,7 @@ function EditmodeController() {
     function saveDetails() {
         var details = ko.utils.unwrapObservable(self.details);
         
+        
         $.each(details, function(index, detail) {
             console.log(detail);
             var solutionQuery = "UPDATE solution_detail SET content = ? WHERE id = ?";
