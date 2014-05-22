@@ -9,6 +9,14 @@ function StartpageController(){
         app.navigateTo("searchresult");
     }
     
+    self.navToRest = function(){
+        app.navigateTo("restclient");
+    }
+    
+    self.navToSoap = function(){
+        app.navigateTo("soapclient");
+    }
+    
     self.initController = function(){
         self.historyEntries.push("> Suche nach Bla");
         self.historyEntries.push("> Suche nach Bla Bla");

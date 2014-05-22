@@ -52,6 +52,9 @@
     <script type="text/javascript" src='controller/14-history.js'></script> 
     <script type="text/javascript" src='controller/15-profilsettings.js'></script> 
     
+    <script type="text/javascript" src='controller/20-soap-client.js'></script> 
+    <script type="text/javascript" src='controller/21-rest-client.js'></script> 
+    
     <script type="text/javascript" src='controller/db.js'></script>
     <script type="text/javascript" src='controller/zz-app.js'></script>
     <script type="text/javascript" src='controller/zzz-header.js'></script>
@@ -160,8 +163,8 @@
         <div data-bind="foreach: app.header.departments">
             <div class="row col-xs-12 optionListTitle" data-bind="html: departmentName"></div>
             <div data-bind="foreach: themes">
-                <div class="row header_option_row">
-                    <div class="col-xs-12" data-bind="html: $data"></div>
+                <div class="row header_option_row" data-bind="click:app.header.navToClient.bind($data, nav)">
+                    <div class="col-xs-12" data-bind="html: name"></div>
                 </div>
             </div>
         </div>
