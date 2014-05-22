@@ -43,21 +43,27 @@ var DB = (function() {
         console.log("error processing SQL: (message: " + error.message + ", code: " + error.code + ")");
     }
 
-    var query = function(queryString, params, callback) {
+    function nullCB() {
+    }
+
+    var query = function(query, params, callback) {
         console.log("executing SQL: " + queryString + " (" + new Date() + ")");
 
         self.db.transaction(function(tx) {
-            tx.executeSql(queryString, params, function(tx, results) {
-                console.log("returning results (" + new Date() + ")");
-                
-                callback(results);
-            }, errorCB);
+            if (callback) {
+                tx.executeSql(query, params, function(tx, results) {
+                    console.log("returning results (" + new Date() + ")");
+                    callback(results);
+                }, errorCB);
+            } else {
+                tx.executeSql(query, params, nullCB, errorCB);
+            }
         }, errorCB);
     };
 
     return {
-        init : initialize,
-        query : query
+        init: initialize,
+        query: query
     };
 })();
 
