@@ -46,17 +46,17 @@ var DB = (function() {
     function nullCB() {
     }
 
-    var query = function(query, params, callback) {
+    var query = function(queryString, params, callback) {
         console.log("executing SQL: " + queryString + " (" + new Date() + ")");
 
         self.db.transaction(function(tx) {
             if (callback) {
-                tx.executeSql(query, params, function(tx, results) {
+                tx.executeSql(queryString, params, function(tx, results) {
                     console.log("returning results (" + new Date() + ")");
                     callback(results);
                 }, errorCB);
             } else {
-                tx.executeSql(query, params, nullCB, errorCB);
+                tx.executeSql(queryString, params, nullCB, errorCB);
             }
         }, errorCB);
     };
