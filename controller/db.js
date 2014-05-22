@@ -20,11 +20,11 @@ var DB = (function() {
             tx.executeSql('INSERT INTO solution (id, name, description) VALUES (2, "Bubble Sort Algorithmus", "Bubblesort (auch Sortieren durch Aufsteigen) ist ein Algorithmus, der vergleichsbasiert eine Liste von Elementen sortiert. Dieses Sortierverfahren arbeitet in-place, sortiert stabil und hat eine Laufzeit von \mathcal{O}(n^2) im schlimmsten (Worst-Case) wie auch im durchschnittlichen Fall (Average-Case)")');
         });
 
-        tx.executeSql('CREATE TABLE IF NOT EXISTS solution_detail_type (id INTEGER NOT NULL PRIMARY KEY, type_name TEXT, type TEXT)', [], function() {
-            tx.executeSql('INSERT INTO solution_detail_type (id, type_name, type) VALUES (1, "Beschreibung", "TEXT")');
-            tx.executeSql('INSERT INTO solution_detail_type (id, type_name, type) VALUES (2, "Problemstellung", "TEXT")');
-            tx.executeSql('INSERT INTO solution_detail_type (id, type_name, type) VALUES (3, "PseudoCode", "CODE")');
-            tx.executeSql('INSERT INTO solution_detail_type (id, type_name, type) VALUES (4, "Code (Java)", "CODE")');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS solution_detail_type (id INTEGER NOT NULL PRIMARY KEY, type_name TEXT, is_code INTEGER, is_textual INTEGER)', [], function() {
+            tx.executeSql('INSERT INTO solution_detail_type (id, type_name, is_code, is_textual) VALUES (1, "Beschreibung", 0, 1)');
+            tx.executeSql('INSERT INTO solution_detail_type (id, type_name, is_code, is_textual) VALUES (2, "Problemstellung", 0, 1)');
+            tx.executeSql('INSERT INTO solution_detail_type (id, type_name, is_code, is_textual) VALUES (3, "PseudoCode", 1, 0)');
+            tx.executeSql('INSERT INTO solution_detail_type (id, type_name, is_code, is_textual) VALUES (4, "Code (Java)", 1, 0)');
         });
 
         tx.executeSql('CREATE TABLE IF NOT EXISTS solution_detail (id INTEGER NOT NULL PRIMARY KEY, detail_type_id INTEGER not null, solution_id INTEGER not null, content TEXT)', [], function() {
@@ -43,9 +43,13 @@ var DB = (function() {
         console.log("error processing SQL: (message: " + error.message + ", code: " + error.code + ")");
     }
 
-    var query = function(query, params, callback) {
+    var query = function(queryString, params, callback) {
+        console.log("executing SQL: " + queryString + " (" + new Date() + ")");
+
         self.db.transaction(function(tx) {
-            tx.executeSql(query, params, function(tx, results) {
+            tx.executeSql(queryString, params, function(tx, results) {
+                console.log("returning results (" + new Date() + ")");
+                
                 callback(results);
             }, errorCB);
         }, errorCB);

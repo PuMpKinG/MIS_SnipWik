@@ -23,12 +23,12 @@ function DetailspageController() {
     }
 
     function loadDetails(solutionId) {
-        var detailsQuery = "SELECT sd.id, sd.content, sdt.id as typeId, sdt.type_name, sdt.type FROM solution_detail sd INNER JOIN solution_detail_type sdt ON sdt.id = sd.detail_type_id WHERE sd.solution_id = ?";
+        var detailsQuery = "SELECT sd.id, sd.content, sdt.id as typeId, sdt.type_name, sdt.is_code, sdt.is_textual FROM solution_detail sd INNER JOIN solution_detail_type sdt ON sdt.id = sd.detail_type_id WHERE sd.solution_id = ?";
         app.db.query(detailsQuery, [solutionId], function(results) {
             var len = results.rows.length;
             for (var rowIndex = 0; rowIndex < len; rowIndex++) {
                 var row = results.rows.item(rowIndex);
-                self.details.push({"itemId" : row.id, "content" : row.content, "typeId" : row.typeId, "name" : row.type_name, "type" : row.type});
+                self.details.push({"itemId" : row.id, "content" : row.content, "typeId" : row.typeId, "name" : row.type_name, "isCode" : row.is_code, "isText" : row.is_textual});
             }
         });
     }
