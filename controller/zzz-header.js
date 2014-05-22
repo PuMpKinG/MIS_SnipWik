@@ -14,15 +14,16 @@ function HeaderController() {
     self.password = ko.observable("Test");
 
     self.departments = ko.observableArray();
-
-    self.loggedInPersonPhoto = ko.observable("css/img/profile_icon.png");
     
+    self.loggedInPersonPhoto = ko.observable("css/img/profile_icon.png");
+
     //css style of button
     self.headerLeftIcon = ko.observable();
     self.headerMiddleSpace = ko.observable();
-    
+
     self.isPencilVisible = ko.observable(false);
     self.isHistoryVisible = ko.observable(false);
+    
     self.isSearchVisible = ko.observable(false);
 
     /***********************************************/
@@ -35,13 +36,13 @@ function HeaderController() {
                 return;
             }
             self.loginBtnTxt('<i class="fa fa-refresh fa-spin" style="color: white; font-size: 14px"></i>');
-            
-            setTimeout(function(){
+
+            setTimeout(function() {
                 self.loggedInPersonPhoto("css/img/kermit.png");
                 self.nobodyIsLoggedIn(false);
             }, 1500);
-            
-            
+
+
         } else {
             bsf.helper.showMessage("Bitte geben Sie gültige Login-Informationen ein");
         }
@@ -69,14 +70,14 @@ function HeaderController() {
     /***********************************************/
     // navigation to next screen, look at configuration path
     self.navigateTo = function(param, data, event) {
-        if(param == "startpage"){
+        if (param == "startpage") {
             app.navigateTo(param, {reset: true, nohistory: true});
         } else {
             app.navigateTo(param);
         }
     };
 
-    self.openProfilSettings = function(){
+    self.openProfilSettings = function() {
         self.optionBtnClick();
         app.navigateTo("profilsettings");
     }
@@ -90,6 +91,12 @@ function HeaderController() {
         } else {
             app.navigateBack();
         }
+    }
+    
+    self.navToClient = function(navController){
+        self.optionBtnClick();
+        app.navigateTo(navController);
+        
     }
 
 
@@ -157,15 +164,26 @@ function HeaderController() {
                 self.isSearchVisible(true);
                 app.headerTitleText("Einstellungen");
                 break;
+            case "RestclientController":
+                self.headerLeftIcon("fa fa-chevron-left");
+                self.headerMiddleSpace("col-xs-11");
+                self.isPencilVisible(false);
+                self.isHistoryVisible(false);
+                self.isSearchVisible(false);
+                app.headerTitleText("REST");
+                break;
+            case "SoapclientController":
+                self.headerLeftIcon("fa fa-chevron-left");
+                self.headerMiddleSpace("col-xs-11");
+                self.isPencilVisible(false);
+                self.isHistoryVisible(false);
+                self.isSearchVisible(false);
+                app.headerTitleText("SOAP");
+                break;
         }
     }
 
     self.initController = function() {
-        self.departments.removeAll();
-        self.departments.push(new ObservableDepartment("Abteilung 1", ["Thema 1"]));
-        console.log("Hier")
-        self.departments.push(new ObservableDepartment("Abteilung 2", ["Thema 2"]));
-
         self.loggedInPersonData({
             FirstName: "Kermit",
             LastName: "Der Frosch"
@@ -173,12 +191,16 @@ function HeaderController() {
 
         initButtons();
         self.nobodyIsLoggedIn(true);
-       
+
     };
     
-    self.refreshCotroller = function(){
+    self.refreshCotroller = function() {
         initButtons();
     }
+    
+ 
+    self.departments.push(new ObservableDepartment("Praktikum 3", [{"name": "Soap-Client", "nav": "soapclient"}, {"name": "Rest-Client", "nav": "restclient"}]));
+
 }
 
 app.header = new HeaderController();
