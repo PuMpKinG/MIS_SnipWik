@@ -202,5 +202,50 @@
     visibility: visible;
     opacity: 0.75;
 }
+
+.footer_bar {
+    .FixedPositionStyle(9888, 100, 0, 0, 0, auto, 34px);
+    #Fonts > .Heading-Font;
+    background-color: @header-background-color-base;
+    border: 2px solid @header-background-color-darker;
+    color: @header-text-color;
+    text-align: center;
+    vertical-align: middle;
+
+    i {
+        margin-top: 2px;
+        text-align: center;
+        font-size: 30px;
+    }
+
+    .footer_left {
+        border-right: 1px solid @header-background-color-darker;
+        height: 30px;
+
+        &:hover,
+        &:focus {
+            background-color: @header-background-color-darker;
+        }
+    }
+
+    .footer_center {
+        height: 30px;
+
+        &:hover,
+        &:focus {
+            background-color: @header-background-color-darker;
+        }
+    }
+
+    .footer_right {
+        border-left: 1px solid @header-background-color-darker;
+        height: 30px;
+
+        &:hover,
+        &:focus {
+            background-color: @header-background-color-darker;
+        }
+    }
+}
     
 
