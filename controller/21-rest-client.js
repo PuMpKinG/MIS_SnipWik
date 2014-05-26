@@ -3,9 +3,9 @@ function RestclientController() {
 
     var doodleRestApiURL = "http://doodle-test.com/api1/WithoutAccessControl";
     var pollURL = doodleRestApiURL + "/polls/";
-    
-    
-    //Description: 
+
+
+    //Description:  http://doodle.com/xsd1/RESTfulDoodle.pdf
     // levels (e.g., „levels=2“ for a Yes-No poll and „levels=3“ for a Yes-No-Ifneedbe poll, default: 2) 
     // locale (e.g., „locale=de“ or „locale=en“) 
     // title (e.g., „title=“When and where?“) 
@@ -18,18 +18,101 @@ function RestclientController() {
     // option1 (e.g., „option1=Pizza“) 
     // option2 (e.g., „option2=Pasta“) 
 
+    var listOfCreatedPolls = ko.observableArray();
+
     var level = 3;
     var locale = "de";
     var hidden = false;
+    var location = "internet";
+
     
-    self.title = ko.observable();
-    self.location = ko.observable();
-    self.description = ko.observable();
-    self.name = ko.observable();
-    self.eMailAddress = ko.observable();
+    self.poll = ko.observable();
+    self.answer = ko.observable();
+    self.statistic = ko.observable();
+
+    self.isStatisticPollVisible = ko.observable(false);
+    self.isDeleteVisible = ko.observable(false);
+    self.isAnswerPollVisible = ko.observable(false);
+    self.isNewPollVisible = ko.observable(false);
+
+
+    /***********************************************/
+    /***                 Funktionen              ***/
+    /***********************************************/
     
-    self.options = ko.observableArray();
-    self.participants = ko.observableArray();
+    
+    
+    self.toggleVisible = function(data) {
+        switch (data) {
+            case 1:
+                self.isStatisticPollVisible (false);
+                self.isDeleteVisible(false);
+                self.isAnswerPollVisible(false);
+                self.isNewPollVisible(true);
+                break;
+            case 2:
+                self.isStatisticPollVisible (false);
+                self.isDeleteVisible(false);
+                self.isAnswerPollVisible(true);
+                self.isNewPollVisible(false);
+                break;
+            case 3:
+                self.isStatisticPollVisible (true);
+                self.isDeleteVisible(false);
+                self.isAnswerPollVisible(false);
+                self.isNewPollVisible(false);
+                break;
+            case 4:
+                self.isStatisticPollVisible (true);
+                self.isDeleteVisible(true);
+                self.isAnswerPollVisible(false);
+                self.isNewPollVisible(false);
+                break;
+
+        }
+    };
+    
+    
+    /***********************************************/
+    /***                 Observable              ***/
+    /***********************************************/
+    var ObservablePoll = function(id, title, desc, name, email, option){
+        var obsPoll = this;
+        obsPoll.id = ko.observable(id);
+        obsPoll.title = ko.observable(title);
+        obsPoll.description = ko.observable(desc);
+        obsPoll.name = ko.observable(name);
+        obsPoll.email = ko.observable(email);
+        obsPoll.options = ko.observableArray(option);
+        
+        obsPoll.addOption = function(){
+            self.options.push({"id": this.options().length, "email": ""});
+        };
+        
+        obsPoll.options.push({"id": 0, "email": ""});
+        
+        // rest poll call
+        obsPoll.createPoll = function(){
+            listOfCreatedPolls.push(this);
+        };
+
+    }
+    
+    var ObservableAnswer = function(){
+        var obsAns = this;
+        obsAns.answerPersonName = ko.observable();
+        obsAns.selectedOption = ko.observable();
+        
+        obsAns.sendAnswer = function(){
+            
+        };
+    }
+    
+    var ObservableStatistic = function(){
+        
+    }
+
+    //--------------------------------------------------------------------------
 
     /***********************************************/
     /***                 Umfrage                 ***/
@@ -143,9 +226,16 @@ function RestclientController() {
             errorCB(jqXHR, jsonValue);
         });
     };
+
     
+    self.initController = function() {
+        self.toggleVisible(1);
+        
+        self.poll(new ObservablePoll(0, "title", "desc", "name", "email", null));
+    }
     
-    
+
+
     //TODO: Create XML for Inputs
 
 }
