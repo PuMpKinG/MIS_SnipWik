@@ -10,7 +10,7 @@ function StartpageController(){
     }
     
     self.navToRest = function(){
-        app.navigateTo("restclient");
+        app.navigateTo("restnewdoodle");
     }
     
     self.navToSoap = function(){
