@@ -1,0 +1,69 @@
+<section id="wrapper">
+    <div id="scroller">
+
+        <h1>Doodle Umfrage</h1>
+
+        <div class="container restOption">
+            <div class="whatDoTitle row">Umfrage beantworten:</div>
+            <div class="row fieldrow">
+                <div class="col-xs-5 fieldTitle">Umfrage wählen:</div>
+                <div class="col-xs-9 fieldInput"> 
+                    <select id="selectforAnswer" name="selectforAnswer" class="input-xlarge" data-bind="foreach: listOfCreatedPolls">
+                        <option data-bind="html: name"></option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle">Title:</div>
+                <div class="col-xs-9 fieldInput">
+                    <textarea id="Beschreibung" data-bind="value: poll.title" name="Beschreibung"></textarea>
+                </div>
+            </div>
+            
+             <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle">Beschreibung:</div>
+                <div class="col-xs-9 fieldInput">
+                     <input id="email" name="email" type="text" data-bind="value: poll.description" placeholder="Email-Adress" class="input-xlarge">
+                </div>
+            </div>
+            
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle">Name:</div>
+                <div class="col-xs-9 fieldInput">
+                    <input id="personName" name="personName" data-bind="value: answer.answerPersonName" type="text" placeholder="Dein Name" class="input-xlarge">
+                </div>
+            </div>
+            
+           
+            <!-- ADD SELECTION -->
+           
+            
+            <button class="btn btn-primary okBtn" data-bind="click: answer.sendAnswer">Erstellen</button>
+        </div>
+        
+        <!-- *********************  Footer Template 1 ******************************** -->
+        <!-- **** Footer with 3 tasks: for profil view              [v0.18]       **** -->
+        <!-- ************************************************************************* -->
+        <div class="footer_bar container" id="footer">
+            <div class="row">
+                <div class="col-xs-3 footer_left" data-bind="click: app.navigateTo('restnewdoodle')">
+                    <div>Neues Doodle</div>
+                </div>
+                <div class="col-xs-3 footer_left" data-bind="click: app.navigateTo('restanswerdoodle')">
+                    <div>Doodle beantworten</div>
+                </div>
+                <div class="col-xs-3 footer_right" data-bind="click: app.navigateTo('restgetdoodle')">
+                    <div>Doodle abrufen</div>
+                </div>
+                <div class="col-xs-3 footer_right" data-bind="click: app.navigateTo('restdeletedoodle')">
+                    <div>Doodle löschen</div>
+                </div>
+            </div>
+
+        </div>
+        <!-- ************************************************************************* -->
+
+
+    </div>
+</section>

@@ -1,0 +1,80 @@
+<section id="wrapper">
+    <div id="scroller">
+
+        <h1>Doodle Umfrage</h1>
+        
+        <div class="container restOption" >
+            <div class="whatDoTitle row">neue Doodle Umfrage erstellen:</div>
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle">Titel:</div>
+                <div class="col-xs-9 fieldInput"> 
+                    <input id="title" name="title" type="text" data-bind="value: poll.title" placeholder="Titel der Umfrage" class="input-xlarge" required="">
+                </div>
+            </div>
+            
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle">Beschreibung:</div>
+                <div class="col-xs-9 fieldInput">
+                    <textarea id="Beschreibung" data-bind="value: poll.description" name="Beschreibung"></textarea>
+                </div>
+            </div>
+            
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle">Name:</div>
+                <div class="col-xs-9 fieldInput">
+                    <input id="personName" name="personName" data-bind="value: poll.name" type="text" placeholder="Dein Name" class="input-xlarge">
+                </div>
+            </div>
+            
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle">Email:</div>
+                <div class="col-xs-9 fieldInput">
+                     <input id="email" name="email" type="text" data-bind="value: poll.email" placeholder="Email-Adress" class="input-xlarge">
+                </div>
+            </div>
+            
+            <div class="row optionrow" >
+                <div class="col-xs-10" data-bind="foreach: poll.options">
+                    <div class="row">
+                        <div class="col-xs-2 fieldTitle" data-bind="html: id"></div>
+                        <div class="col-xs-10 fieldInput">
+                             <input id="option" data-bind="value: email" name="otion" type="text" placeholder="wählebare Option" class="input-xlarge">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <button class="btn btn-primary  newPollBtn" data-bind="click: poll.addOption"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary okBtn" data-bind="click: poll.createPoll">Erstellen</button>
+        </div>
+        
+        
+        
+
+          <!-- *********************  Footer Template 1 ******************************** -->
+        <!-- **** Footer with 3 tasks: for profil view              [v0.18]       **** -->
+        <!-- ************************************************************************* -->
+        <div class="footer_bar container" id="footer">
+            <div class="row">
+                <div class="col-xs-3 footer_left" data-bind="click: app.navigateTo('restnewdoodle')">
+                    <div>Neues Doodle</div>
+                </div>
+                <div class="col-xs-3 footer_left" data-bind="click: app.navigateTo('restanswerdoodle')">
+                    <div>Doodle beantworten</div>
+                </div>
+                <div class="col-xs-3 footer_right" data-bind="click: app.navigateTo('restgetdoodle')">
+                    <div>Doodle abrufen</div>
+                </div>
+                <div class="col-xs-3 footer_right" data-bind="click: app.navigateTo('restdeletedoodle')">
+                    <div>Doodle löschen</div>
+                </div>
+            </div>
+
+        </div>
+        <!-- ************************************************************************* -->
+
+
+    </div>
+</section>

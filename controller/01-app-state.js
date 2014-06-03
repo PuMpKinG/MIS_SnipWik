@@ -4,6 +4,8 @@ function AppState() {
 
     var debugOnTablet = null;
     var solutionId = null;
+    var editSolution = null;
+    var editDetails = null;
     
     self.debugOnTablet = function (v) {
         if (typeof v !== 'undefined') { debugOnTablet = v; }
@@ -11,6 +13,16 @@ function AppState() {
     };
     
     self.solutionId = function (v) {
+        if (typeof v !== 'undefined') { solutionId = v; }
+        return (typeof solutionId === 'undefined') ? null : solutionId;
+    };
+    
+    self.editSolution = function (v) {
+        if (typeof v !== 'undefined') { solutionId = v; }
+        return (typeof solutionId === 'undefined') ? null : solutionId;
+    };
+    
+    self.editDetails = function (v) {
         if (typeof v !== 'undefined') { solutionId = v; }
         return (typeof solutionId === 'undefined') ? null : solutionId;
     };

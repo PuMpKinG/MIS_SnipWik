@@ -10,8 +10,8 @@ function DetailspageController() {
         loadSolution(solutionId);
         loadDetails(solutionId);
         
-        app.state.editSolution = self.solution;
-        app.state.editDetails = self.details;
+        app.state.editSolution(self.solution);
+        app.state.editDetails(self.details);
     };
 
     function loadSolution(solutionId) {

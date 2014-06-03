@@ -4,6 +4,8 @@
     // helper controller
     app.state = new AppState();
     app.db;
+    
+    app.rest = RestController();
 
     app.headerTitleText = ko.observable("SnipWik");
 

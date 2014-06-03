@@ -14,8 +14,8 @@ function EditmodeController() {
 
     self.initController = function() {
         self.solutionId = app.state.solutionId();
-        self.solution = app.state.editSolution;
-        self.details = app.state.editDetails;
+        self.solution = app.state.editSolution();
+        self.details = app.state.editDetails();
     };
 
     function saveSolution() {
