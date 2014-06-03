@@ -42,21 +42,21 @@
             <button class="btn btn-primary okBtn" data-bind="click: answer.sendAnswer">Erstellen</button>
         </div>
         
-        <!-- *********************  Footer Template 1 ******************************** -->
+          <!-- *********************  Footer Template 1 ******************************** -->
         <!-- **** Footer with 3 tasks: for profil view              [v0.18]       **** -->
         <!-- ************************************************************************* -->
         <div class="footer_bar container" id="footer">
             <div class="row">
-                <div class="col-xs-3 footer_left" data-bind="click: app.navigateTo('restnewdoodle')">
+                <div class="col-xs-3 footer_left" data-bind="click: function() {app.navigateTo('restnewdoodle')}">
                     <div>Neues Doodle</div>
                 </div>
-                <div class="col-xs-3 footer_left" data-bind="click: app.navigateTo('restanswerdoodle')">
+                <div class="col-xs-3 footer_left" data-bind="click: function() {app.navigateTo('restanswerdoodle')}">
                     <div>Doodle beantworten</div>
                 </div>
-                <div class="col-xs-3 footer_right" data-bind="click: app.navigateTo('restgetdoodle')">
+                <div class="col-xs-3 footer_right" data-bind="click: function() {app.navigateTo('restgetdoodle')}">
                     <div>Doodle abrufen</div>
                 </div>
-                <div class="col-xs-3 footer_right" data-bind="click: app.navigateTo('restdeletedoodle')">
+                <div class="col-xs-3 footer_right" data-bind="click: function() {app.navigateTo('restdeletedoodle')}">
                     <div>Doodle löschen</div>
                 </div>
             </div>
