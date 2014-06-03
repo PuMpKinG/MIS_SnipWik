@@ -5,7 +5,7 @@
     app.state = new AppState();
     app.db;
     
-    app.rest = RestController();
+    app.rest = new RestController();
 
     app.headerTitleText = ko.observable("SnipWik");
 

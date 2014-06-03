@@ -26,7 +26,8 @@ function RestNewdoodleController() {
 
         var doc = document.implementation.createDocument(null, null, null);
 
-        var opts = "";
+        var opts = new Array();
+        
         ko.utils.arrayForEach(this.options(), function(opt) {
             opts += xmlify("option", opt.option);
         });
@@ -46,31 +47,14 @@ function RestNewdoodleController() {
         console.log(data);
 
         app.rest.postPoll(data, 
-        function() {
-
+        function(data, jqXHR) {
+            console.log("success push new doodle with answer: " + data);
+            
         },
-        function() {
-
+        function(jqXHR, jsonValue) {
+            console.log("error on push new doole: " + jsonValue);
         });
     };
-    
-    /*
-     * <poll xmlns="http://doodle.com/xsd1"> 
-     <type>TEXT</type> 
-     <hidden>false</hidden> 
-     <levels>2</levels> 
-     <title>PPP</title> 
-     <description>yum!</description> 
-     <initiator> 
-     <name>Paul</name> 
-     </initiator> 
-     <options> 
-     <option>Pasta</option> 
-     <option>Pizza</option> 
-     Copyright © 2008-2012 Doodle AG 1.6.2 Page 4/9<option>Polenta</option> 
-     </options> 
-     </poll>
-     */
 
     var doc = document.implementation.createDocument(null, null, null);
 
@@ -87,8 +71,35 @@ function RestNewdoodleController() {
         }
 
         return node;
+    };
+    
+       /*
+     * <poll xmlns="http://doodle.com/xsd1"> 
+     <type>TEXT</type> 
+     <hidden>false</hidden> 
+     <levels>2</levels> 
+     <title>PPP</title> 
+     <description>yum!</description> 
+     <initiator> 
+     <name>Paul</name> 
+     </initiator> 
+     <options> 
+     <option>Pasta</option> 
+     <option>Pizza</option> 
+     Copyright © 2008-2012 Doodle AG 1.6.2 Page 4/9<option>Polenta</option> 
+     </options> 
+     </poll>
+     */
+    
+    //save doodleID and Name in DB
+    function savePoll() {
+        var pollQuery = "INSERT INTO poll (id, name) VALUES (?, ?)";
+        app.db.query(pollQuery, [self.id(), self.name()]);
     }
-    ;
+    
+    self.initController = function() {
+            
+    }
 
 }
 

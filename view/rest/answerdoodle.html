@@ -8,56 +8,74 @@
             <div class="row fieldrow">
                 <div class="col-xs-5 fieldTitle">Umfrage wählen:</div>
                 <div class="col-xs-9 fieldInput"> 
-                    <select id="selectforAnswer" name="selectforAnswer" class="input-xlarge" data-bind="foreach: listOfCreatedPolls">
+                    <select id="selectforAnswer" name="selectforAnswer" class="input-xlarge" data-bind="foreach: polls, value: selectedPoll">
                         <option data-bind="html: name"></option>
                     </select>
                 </div>
             </div>
             
+          
+            <div style="margin-top: 10px" class="whatDoTitle row">Informationen zum gewählten Doodle:</div>
             <div class="row fieldrow">
-                <div class="col-xs-3 fieldTitle">Title:</div>
-                <div class="col-xs-9 fieldInput">
-                    <textarea id="Beschreibung" data-bind="value: poll.title" name="Beschreibung"></textarea>
+                <div class="col-xs-3 fieldTitle">Titel:</div>
+                <div class="col-xs-9 fieldInput"> 
+                    <span data-bind="html: title" class="col-xs-12">
                 </div>
             </div>
-            
-             <div class="row fieldrow">
+
+            <div class="row fieldrow">
                 <div class="col-xs-3 fieldTitle">Beschreibung:</div>
                 <div class="col-xs-9 fieldInput">
-                     <input id="email" name="email" type="text" data-bind="value: poll.description" placeholder="Email-Adress" class="input-xlarge">
+                    <textarea id="Beschreibung" data-bind="value: description" name="Beschreibung" disabled=""></textarea>
                 </div>
             </div>
-            
+
             <div class="row fieldrow">
                 <div class="col-xs-3 fieldTitle">Name:</div>
                 <div class="col-xs-9 fieldInput">
-                    <input id="personName" name="personName" data-bind="value: answer.answerPersonName" type="text" placeholder="Dein Name" class="input-xlarge">
+                    <span data-bind="html: name" class="col-xs-12">
                 </div>
             </div>
             
+            
+            <!-- Eingaben für participant -->
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle">Name:</div>
+                <div class="col-xs-9 fieldInput">
+                    <input id="personName" name="personName" data-bind="value: personName" type="text" placeholder="Dein Name" class="input-xlarge">
+                </div>
+            </div>
            
-            <!-- ADD SELECTION -->
+             <div class="row optionrow" >
+                 <div class="fieldTitle col-xs-12" >Bitte Antwort auswählen:</div>
+                <div class="col-xs-12" data-bind="foreach: options">
+                    <div class="row">
+                        <input class="col-xs-12" type="checkbox" name="selectedAnswer" data-bind="value: name, html: name">
+                    </div>
+                </div>
+               
+            </div>
            
             
-            <button class="btn btn-primary okBtn" data-bind="click: answer.sendAnswer">Erstellen</button>
+            <button class="btn btn-primary okBtn" data-bind="click: sendAnswer">Erstellen</button>
         </div>
         
-          <!-- *********************  Footer Template 1 ******************************** -->
+        <!-- *********************  Footer Template 1 ******************************** -->
         <!-- **** Footer with 3 tasks: for profil view              [v0.18]       **** -->
         <!-- ************************************************************************* -->
         <div class="footer_bar container" id="footer">
             <div class="row">
-                <div class="col-xs-3 footer_left" data-bind="click: function() {app.navigateTo('restnewdoodle')}">
-                    <div>Neues Doodle</div>
+                <div class="col-xs-3 footer_left" data-bind="click: function() {app.navigateTo('rest/newdoodle')}">
+                    <div>New</div>
                 </div>
-                <div class="col-xs-3 footer_left" data-bind="click: function() {app.navigateTo('restanswerdoodle')}">
-                    <div>Doodle beantworten</div>
+                <div class="col-xs-3 footer_left" data-bind="click: function() {app.navigateTo('rest/answerdoodle')}">
+                    <div>Answer</div>
                 </div>
-                <div class="col-xs-3 footer_right" data-bind="click: function() {app.navigateTo('restgetdoodle')}">
-                    <div>Doodle abrufen</div>
+                <div class="col-xs-3 footer_right" data-bind="click: function() {app.navigateTo('rest/getdoodle')}">
+                    <div>Call</div>
                 </div>
-                <div class="col-xs-3 footer_right" data-bind="click: function() {app.navigateTo('restdeletedoodle')}">
-                    <div>Doodle löschen</div>
+                <div class="col-xs-3 footer_right" data-bind="click: function() {app.navigateTo('rest/deletedoodle')}">
+                    <div>Delete</div>
                 </div>
             </div>
 

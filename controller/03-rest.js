@@ -17,39 +17,6 @@ function RestController() {
     // 
     // option1 (e.g., „option1=Pizza“) 
     // option2 (e.g., „option2=Pasta“) 
-
-
-  
-
-    
-    self.poll = ko.observable();
-    self.answer = ko.observable();
-    self.statistic = ko.observable();
-    
-    
-    /***********************************************/
-    /***                 Observable              ***/
-    /***********************************************/
-    var ObservablePoll = function(id, title, desc, name, email, option){
-        var obsPoll = this;
-       
-
-    }
-    
-    var ObservableAnswer = function(){
-        var obsAns = this;
-        obsAns.answerPersonName = ko.observable();
-        obsAns.selectedOption = ko.observable();
-        
-        obsAns.sendAnswer = function(){
-            
-        };
-    }
-    
-    var ObservableStatistic = function(){
-        
-    }
-
     //--------------------------------------------------------------------------
 
     /***********************************************/
@@ -80,8 +47,8 @@ function RestController() {
         GET(pollURL + pollID + "/participants/", participantID, successCB, errorCB);
     };
 
-    self.postParticipant = function(pollID, successCB, errorCB) {
-        POST(pollURL + pollID + "/participants/", "", successCB, errorCB);
+    self.postParticipant = function(pollID, data, successCB, errorCB) {
+        POST(pollURL + pollID + "/participants/", "", data, successCB, errorCB);
     };
 
     self.deleteParticipant = function(pollID, participantID, successCB, errorCB) {
@@ -105,45 +72,45 @@ function RestController() {
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
         }).fail(function(jqXHR) {
-            var jsonValue = jqXHR.responseText != "" ? jQuery.parseJSON(jqXHR.responseText) : emptyResponse;
+            var jsonValue = jqXHR.responseText != "" ? jqXHR.responseText : emptyResponse;
             errorCB(jqXHR, jsonValue);
         });
     };
 
     var POST = function(url, urlExtra, postData, successCB, errorCB, synchron) {
         var isAsync = synchron ? false : true;
-        console.log("ajax post url: " + url + urlExtra + " [postdata:" + JSON.stringify(postData) + "]");
+        console.log("ajax post url: " + url + urlExtra + " [postdata:" + postData + "]");
         $.ajax({
             url: url + urlExtra,
             type: 'POST',
             contentType: "application/xml",
             dataType: 'xml',
             timeout: timeout,
-            data: "=" + JSON.stringify(postData),
+            data: "=" + postData,
             async: isAsync,
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
         }).fail(function(jqXHR) {
-            var jsonValue = jqXHR.responseText != "" ? jQuery.parseJSON(jqXHR.responseText) : emptyResponse;
+            var jsonValue = jqXHR.responseText != "" ? jqXHR.responseText : emptyResponse;
             errorCB(jqXHR, jsonValue);
         });
     };
 
     var PUT = function(url, urlExtra, putData, successCB, errorCB, synchron) {
         var isAsync = synchron ? false : true;
-        console.log("ajax put url: " + url + urlExtra + " [putdata:" + JSON.stringify(putData) + "]");
+        console.log("ajax put url: " + url + urlExtra + " [putdata:" + putData + "]");
         $.ajax({
             url: url + urlExtra,
             type: 'PUT',
             contentType: "application/xml",
             dataType: 'xml',
             timeout: timeout,
-            data: "=" + JSON.stringify(putData),
+            data: "=" + putData,
             async: isAsync,
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
         }).fail(function(jqXHR, status) {
-            var jsonValue = jqXHR.responseText != "" ? jQuery.parseJSON(jqXHR.responseText) : emptyResponse;
+            var jsonValue = jqXHR.responseText != "" ? jqXHR.responseText : emptyResponse;
             errorCB(jqXHR, jsonValue);
         });
     };
@@ -160,20 +127,10 @@ function RestController() {
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
         }).fail(function(jqXHR) {
-            var jsonValue = jqXHR.responseText != "" ? jQuery.parseJSON(jqXHR.responseText) : emptyResponse;
+            var jsonValue = jqXHR.responseText != "" ? jqXHR.responseText : emptyResponse;
             errorCB(jqXHR, jsonValue);
         });
     };
 
-    
-    self.initController = function() {
-        self.toggleVisible(1);
-        
-        self.poll(new ObservablePoll(0, "title", "desc", "name", "email", null));
-    }
-    
-
-
-    //TODO: Create XML for Inputs
 
 }

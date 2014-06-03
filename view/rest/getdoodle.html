@@ -3,98 +3,91 @@
 
         <h1>Doodle Umfrage</h1>
         
-        <div class="container statisticPoll" >
-            <form class="form-horizontal">
-                <fieldset>
-
-                    <!-- Form Name -->
-                    <legend>Umfrage Statistik</legend>
-
-                    <!-- Select Basic -->
-                    <div class="control-group">
-                        <label class="control-label" for="selectPollForStatitic">Umfrage auswählen</label>
-                        <div class="controls">
-                            <select id="selectPollForStatitic" name="selectPollForStatitic" class="input-xlarge">
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="control-group">
-                        <label class="control-label" for="titleForStatistic">Titel</label>
-                        <div class="controls">
-                            <input id="titleForStatistic" name="titleForStatistic" type="text" placeholder="Titel der Umfrage" class="input-xlarge" required="">
-
-                        </div>
-                    </div>
-
-                    <!-- Textarea -->
-                    <div class="control-group">
-                        <label class="control-label" for="descriptionForStatistic">Beschreibung</label>
-                        <div class="controls">                     
-                            <textarea id="descriptionForStatistic" name="descriptionForStatistic"></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="control-group">
-                        <label class="control-label" for="personForStatitic">Name</label>
-                        <div class="controls">
-                            <input id="personForStatitic" name="personForStatitic" type="text" placeholder="Dein Name" class="input-xlarge">
-
-                        </div>
-                    </div>
-
-                    <!-- Multiple Radios -->
-                    <div class="control-group">
-                        <label class="control-label" for="answerForStatistic">Anwort von </label>
-                        <div class="controls">
-                            <label class="radio" for="answerForStatistic-0">
-                                <input type="radio" name="answerForStatistic" id="answerForStatistic-0" value="a" checked="checked">
-                                a
-                            </label>
-                            <label class="radio" for="answerForStatistic-1">
-                                <input type="radio" name="answerForStatistic" id="answerForStatistic-1" value="b">
-                                b
-                            </label>
-                            <label class="radio" for="answerForStatistic-2">
-                                <input type="radio" name="answerForStatistic" id="answerForStatistic-2" value="c">
-                                c
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Button -->
-                    <div class="control-group">
-                        <label class="control-label" for="addNew"></label>
-                        <div class="controls">
-                            <button id="addNew" name="addNew" class="btn btn-primary">Bestätigen</button>
-                        </div>
-                    </div>
-
-                </fieldset>
-            </form>
-
+        <div class="control-group">
+            <label class="control-label" for="selectforAnswer">Umfrage auswählen</label>
+            <div class="controls">
+                <select id="selectforAnswer" name="selectforAnswer" class="input-xlarge" data-bind="foreach: polls, value: selectedPoll, event:{ change: selectedPollChanged }">
+                    <option data-bind="hmtl: name"></option>
+                </select>
+            </div>
         </div>
 
 
-       
-       <!-- *********************  Footer Template 1 ******************************** -->
+        <div class="container restOption" >
+            <div class="whatDoTitle row">Informationen zum gewählten Doodle:</div>
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle">Titel:</div>
+                <div class="col-xs-9 fieldInput"> 
+                    <span data-bind="html: title" class="col-xs-12">
+                </div>
+            </div>
+
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle">Beschreibung:</div>
+                <div class="col-xs-9 fieldInput">
+                    <textarea id="Beschreibung" data-bind="value: description" name="Beschreibung" disabled=""></textarea>
+                </div>
+            </div>
+
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle">Name:</div>
+                <div class="col-xs-9 fieldInput">
+                    <span data-bind="html: name" class="col-xs-12">
+                </div>
+            </div>
+
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle">Email:</div>
+                <div class="col-xs-9 fieldInput">
+                   <span data-bind="html: email" class="col-xs-12">
+                </div>
+            </div>
+
+            <div class="row optionrow" >
+                <div class="col-xs-12" data-bind="foreach: options">
+                    <div class="row">
+                        <div class="col-xs-2 fieldTitle" data-bind="html: id"></div>
+                        <div class="col-xs-10 fieldInput">
+                            <span data-bind="html: option" class="col-xs-12">
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            
+            
+             <div class="row optionrow" >
+                <div class="col-xs-12" data-bind="foreach: participants">
+                    <div class="row">
+                        <div class="col-xs-3 fieldTitle" data-bind="html: name"></div>
+                        <div class="col-xs-9 fieldInput">
+                            <span data-bind="html: printSelected" class="col-xs-12">
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            
+        </div>
+
+
+
+        <!-- *********************  Footer Template 1 ******************************** -->
         <!-- **** Footer with 3 tasks: for profil view              [v0.18]       **** -->
         <!-- ************************************************************************* -->
         <div class="footer_bar container" id="footer">
             <div class="row">
-                <div class="col-xs-3 footer_left" data-bind="click: function() {app.navigateTo('restnewdoodle')}">
-                    <div>Neues Doodle</div>
+                <div class="col-xs-3 footer_left" data-bind="click: function() {app.navigateTo('rest/newdoodle')}">
+                    <div>New</div>
                 </div>
-                <div class="col-xs-3 footer_left" data-bind="click: function() {app.navigateTo('restanswerdoodle')}">
-                    <div>Doodle beantworten</div>
+                <div class="col-xs-3 footer_left" data-bind="click: function() {app.navigateTo('rest/answerdoodle')}">
+                    <div>Answer</div>
                 </div>
-                <div class="col-xs-3 footer_right" data-bind="click: function() {app.navigateTo('restgetdoodle')}">
-                    <div>Doodle abrufen</div>
+                <div class="col-xs-3 footer_right" data-bind="click: function() {app.navigateTo('rest/getdoodle')}">
+                    <div>Call</div>
                 </div>
-                <div class="col-xs-3 footer_right" data-bind="click: function() {app.navigateTo('restdeletedoodle')}">
-                    <div>Doodle löschen</div>
+                <div class="col-xs-3 footer_right" data-bind="click: function() {app.navigateTo('rest/deletedoodle')}">
+                    <div>Delete</div>
                 </div>
             </div>
 
