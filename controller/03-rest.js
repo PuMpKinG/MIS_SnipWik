@@ -61,8 +61,8 @@ function RestController() {
         GET(pollURL, id, successCB, errorCB);
     };
 
-    self.postPoll = function(successCB, errorCB) {
-        POST(pollURL, "", successCB, errorCB);
+    self.postPoll = function(data, successCB, errorCB) {
+        POST(pollURL, data, successCB, errorCB);
     };
 
     self.deletePoll = function(id, successCB, errorCB) {
