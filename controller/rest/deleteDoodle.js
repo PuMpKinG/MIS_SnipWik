@@ -5,14 +5,19 @@ function RestDeletedoodleController() {
     self.selectedPoll = ko.observable();
     
     self.deletePoll = function(){
-        // rest call
-    }
+        // TODO: X-Doodle Key aus dem Header und 16 Charakter Id 
+        //       wird zum Löschen benötigt. Muss noch zusätzlich
+        //       gespeichert werden.
+        app.rest.deletePoll(self.selectedPoll(), function() {
+           console.log("successfully deleted poll"); 
+        }); 
+    };
     
     self.initController = function() {
-        loadPoll();
-    }
+        self.loadPoll();
+    };
     
-     function loadPoll() {
+    self.loadPoll = function() {
         var pollQuery = "SELECT * FROM poll";
         app.db.query(pollQuery, [], function(results) {
             var len = results.rows.length;
@@ -21,6 +26,6 @@ function RestDeletedoodleController() {
                 self.polls.push({"id": row.id, "name": row.name});
             }
         });
-    }
+    };
 }
 

@@ -32,24 +32,18 @@ function RestAnswerdoodleController() {
     self.sendAnswer = function() {
         self.answerOptions = getAnswerCheckboxes("selectedAnswer");
 
-        var doc = document.implementation.createDocument(null, null, null);
-
-        var ansOpt = new Array();
+        var data = "<participant xmlns='http://doodle.com/xsd1'>";
+        data += "<name>"+self.personName()+"</name>";
+        data += "<preferences>";
         self.answerOptions.forEach(function(opt){
-            ansOpt += xmlify("option", opt);
+            data += "<option>"+opt+"</option>";
         });
-        
-
-        var doc = document.implementation.createDocument(null, null, null);
-
-        var data = xmlify("participant",
-                xmlify("name", self.personName()),
-                xmlify("preferences", opts)
-                );
+        data += "</preferences>";
+        data += "</participant>";
 
         console.log(data);
 
-        app.rest.postParticipant(self.id(), data,
+        app.rest.postParticipant(self.selectedPoll(), data,
                 function(data, jqXHR) {
                     console.log("success push new participant for poll with id: " + self.id() + ", data: " + data);
 
@@ -59,30 +53,25 @@ function RestAnswerdoodleController() {
                 });
     };
 
-    var doc = document.implementation.createDocument(null, null, null);
-
-    function xmlify() {
-        var node = doc.createElement(arguments[0]), text;
-
-        for (var i = 1; i < arguments.length; i++) {
-            if (typeof arguments[i] == 'string') {
-                node.appendChild(doc.createTextNode(arguments[i]));
-            }
-            else {
-                node.appendChild(arguments[i]);
-            }
-        }
-
-        return node;
-    }
-    ;
-
-
     self.initController = function() {
-        loadPoll();
-    }
+        self.loadPoll();
+        
+        var testData = "<?xml version='1.0' encoding='UTF-8'?><poll xmlns='http://doodle.com/xsd1'><latestChange>2014-06-04T23:17:19+02:00</latestChange><type>TEXT</type><extensions/><hidden>false</hidden><writeOnce>false</writeOnce><requireAddress>false</requireAddress><requireEMail>false</requireEMail><requirePhone>false</requirePhone><byInvitationOnly>false</byInvitationOnly><levels>2</levels><state>OPEN</state><language>en</language><title>Test</title><description>Test-Umfrage</description><initiator><name>Ich</name><userId></userId><eMailAddress></eMailAddress></initiator><options><option>Huhn</option><option>Ei</option></options><participants nrOf='0'></participants><comments nrOf='0'></comments><features></features></poll>";
+        
+        self.parsePoll(testData);
+    };
 
-    function loadPoll() {
+    self.parsePoll = function(data) {
+        var xml = $.xml2json(data);    
+            self.title(xml.title);
+            self.description(xml.description);
+            self.name(xml.initiator.name);
+            $.each(xml.options.option, function(i, item){
+                self.options.push({"id": self.options().length, "name": item});
+            });
+    };
+
+    self.loadPoll = function() {
         var pollQuery = "SELECT * FROM poll";
         app.db.query(pollQuery, [], function(results) {
             var len = results.rows.length;

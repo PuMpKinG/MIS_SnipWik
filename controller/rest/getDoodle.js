@@ -12,16 +12,16 @@ function RestGetdoodleController() {
     self.email = ko.observable();
 
     self.options = ko.observableArray();
-    self.participants = ko.observaleArray();
+    self.participants = ko.observableArray();
 
 
-    var ObservableParticipant = function(id, name, userID, options) {
+    var ObservableParticipant = function(id, name, userId, options) {
         var obsPar = this;
 
         obsPar.id = ko.observable(id);
-        obsPar.name = ko.observable(name);
+        obsPar.pname = ko.observable(name);
         obsPar.userId = ko.observable(userId);
-        obsPar.selectedOptions = ko.observableArray();
+        obsPar.printSelected = "";
 
         // option in rest sehen so aus:
         //<option>0</option> 
@@ -29,31 +29,45 @@ function RestGetdoodleController() {
         //<option>0</option> 
         //<option>0</option> 
         //<option>1</option>
+        var idx = 0;
         options.forEach(function(option) {
             if (option == 1) {
-                obspar.selectedOptions.push(self.options()[option]);
+                obsPar.printSelected += self.options()[idx].option + " ";
             }
-        })
+            idx++;
+        });
+    };
 
-        obsPar.printSelected = ko.computed(function() {
-            var ret = "";
-            obsPar.selectedOptions.forEach(function(sel) {
-                ret = ret + sel;
-            });
-            return ret;
-        }, this);
-    }
-
-    self.selectedPollChanged = function() {
-        //new rest call for selected  poll
-    }
+    self.selectedPollChanged = function() {        
+        app.rest.getPoll(self.selectedPoll(), function(data) {
+            self.parsePoll(data);
+        });
+    };
 
 
     self.initController = function() {
-        loadPoll();
+        self.loadPoll();
+        
+        var testData = "<?xml version='1.0' encoding='UTF-8'?><poll xmlns='http://doodle.com/xsd1'><latestChange>2014-06-04T23:17:19+02:00</latestChange><type>TEXT</type><extensions/><hidden>false</hidden><writeOnce>false</writeOnce><requireAddress>false</requireAddress><requireEMail>false</requireEMail><requirePhone>false</requirePhone><byInvitationOnly>false</byInvitationOnly><levels>2</levels><state>OPEN</state><language>en</language><title>Test</title><description>Test-Umfrage</description><initiator><name>Ich</name><userId></userId><eMailAddress></eMailAddress></initiator><options><option>Huhn</option><option>Ei</option></options><participants><participant><id>1</id><name>Myke</name><userId>rgnrsqvsirr5s22srgnrsqvsirr5s22s</userId><preferences><option></option><option>0</option><option>1</option></preferences></participant></participants><comments nrOf='0'></comments><features></features></poll>";
+        
+        self.parsePoll(testData);
     };
 
-    function loadPoll() {
+    self.parsePoll = function(data) {
+        var xml = $.xml2json(data);    
+            self.title(xml.title);
+            self.description(xml.description);
+            self.name(xml.initiator.name);
+            self.email(xml.initiator.eMailAddress);
+            $.each(xml.options.option, function(i, item){
+                self.options.push({"id": self.options().length, "option": item});
+            });            
+            $.each(xml.participants, function(i, item){
+                self.participants.push(ObservableParticipant(item.id, item.name, item.userId, item.preferences.option));
+            });
+    };
+
+    self.loadPoll = function() {
         var pollQuery = "SELECT * FROM poll";
         app.db.query(pollQuery, [], function(results) {
             var len = results.rows.length;
@@ -62,9 +76,6 @@ function RestGetdoodleController() {
                 self.polls.push({"id" : rowIndex, "name" : row.name});
             }
         });
-    }
-
-
-
+    };
 }
 

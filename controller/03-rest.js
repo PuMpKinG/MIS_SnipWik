@@ -2,7 +2,7 @@ function RestController() {
     var self = this;
 
     var doodleRestApiURL = "http://doodle-test.com/api1WithoutAccessControl";
-    var pollURL = doodleRestApiURL + "/polls/";
+    var pollURL = doodleRestApiURL + "/polls";
 
 
     //Description:  http://doodle.com/xsd1/RESTfulDoodle.pdf
@@ -25,7 +25,7 @@ function RestController() {
     self.getPoll = function(id, successCB, errorCB) {
         if (typeof id !== "number" && !isNaN(id))
             throw "id is not a valid number!";
-        GET(pollURL, id, successCB, errorCB);
+        GET(pollURL, "/" + id, successCB, errorCB);
     };
 
     self.postPoll = function(data, successCB, errorCB) {
@@ -35,7 +35,7 @@ function RestController() {
     self.deletePoll = function(id, successCB, errorCB) {
         if (typeof id !== "number" && !isNaN(id))
             throw "id is not a valid number!";
-        DELETE(pollURL, id, successCB, errorCB);
+        DELETE(pollURL + "/" + id ,"", successCB, errorCB);
     };
 
     /***********************************************/
@@ -44,17 +44,17 @@ function RestController() {
     self.getParticipant = function(pollID, participantID, successCB, errorCB) {
         if (typeof id !== "number" && !isNaN(id))
             throw "id is not a valid number!";
-        GET(pollURL + pollID + "/participants/", participantID, successCB, errorCB);
+        GET(pollURL + "/" + pollID + "/participants/", participantID, successCB, errorCB);
     };
 
     self.postParticipant = function(pollID, data, successCB, errorCB) {
-        POST(pollURL + pollID + "/participants/", "", data, successCB, errorCB);
+        POST(pollURL + "/" + pollID + "/participants", "", data, successCB, errorCB);
     };
 
     self.deleteParticipant = function(pollID, participantID, successCB, errorCB) {
         if (typeof id !== "number" && !isNaN(id))
             throw "id is not a valid number!";
-        DELETE(pollURL + pollID + "/participants/", participantID, successCB, errorCB);
+        DELETE(pollURL + "/" + pollID + "/participants/", participantID, successCB, errorCB);
     };
 
 
@@ -68,7 +68,7 @@ function RestController() {
             url: url + urlExtra,
             type: 'GET',
             dataType: "xml",
-            async: isAsync,
+            async: isAsync
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
         }).fail(function(jqXHR) {
@@ -86,8 +86,8 @@ function RestController() {
             contentType: "application/xml",
             dataType: 'xml',
            // timeout: timeout,
-            data: postData.outerHTML,
-            async: isAsync,
+            data: postData,
+            async: isAsync
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
         }).fail(function(jqXHR) {
@@ -104,7 +104,6 @@ function RestController() {
             type: 'PUT',
             contentType: "application/xml",
             dataType: 'xml',
-            timeout: timeout,
             data: "=" + putData,
             async: isAsync,
         }).done(function(data, status, jqXHR) {
@@ -122,7 +121,6 @@ function RestController() {
             url: url + urlExtra,
             type: 'DELETE',
             dataType: "application/xml",
-            timeout: timeout,
             async: isAsync,
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);

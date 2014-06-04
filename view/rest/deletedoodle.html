@@ -15,7 +15,7 @@
                         <label class="control-label" for="selectforAnswer">Umfrage auswählen</label>
                         <div class="controls">
                             <select id="selectforAnswer" name="selectforAnswer" class="input-xlarge" data-bind="foreach: polls, value: selectedPoll">
-                                <option data-bind="text: name"></option>
+                                <option data-bind="text: name, value: id"></option>
                             </select>
                         </div>
                     </div>
