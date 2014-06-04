@@ -13,7 +13,7 @@ function SearchresultController() {
             var len = results.rows.length;
             for (var rowIndex = 0; rowIndex < len; rowIndex++) {
                 var row = results.rows.item(rowIndex);
-                self.searchresult.push({"solutionId": row.id, "title": row.name, "description": row.description});
+                self.searchresult.push({"solutionId" : row.id, "title" : row.name, "description" : row.description});
             }
         });
     };

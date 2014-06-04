@@ -18,13 +18,13 @@ function AppState() {
     };
     
     self.editSolution = function (v) {
-        if (typeof v !== 'undefined') { solutionId = v; }
-        return (typeof solutionId === 'undefined') ? null : solutionId;
+        if (typeof v !== 'undefined') { editSolution = v; }
+        return (typeof editSolution === 'undefined') ? null : editSolution;
     };
     
     self.editDetails = function (v) {
-        if (typeof v !== 'undefined') { solutionId = v; }
-        return (typeof solutionId === 'undefined') ? null : solutionId;
+        if (typeof v !== 'undefined') { editDetails = v; }
+        return (typeof editDetails === 'undefined') ? null : editDetails;
     };
 
 }
