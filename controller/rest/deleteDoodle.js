@@ -18,7 +18,7 @@ function RestDeletedoodleController() {
             var len = results.rows.length;
             for (var rowIndex = 0; rowIndex < len; rowIndex++) {
                 var row = results.rows.item(rowIndex);
-                self.polls.push({"id": rowIndex, "name": row.name});
+                self.polls.push({"id": row.id, "name": row.name});
             }
         });
     }
