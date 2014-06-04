@@ -26,10 +26,10 @@ function RestNewdoodleController() {
 
         var doc = document.implementation.createDocument(null, null, null);
 
-        var opts = new Array();
+        var opts = "";
         
         ko.utils.arrayForEach(this.options(), function(opt) {
-            opts += xmlify("option", opt.option);
+            opts += xmlify("option", opt.option).outerHTML;
         });
 
         var doc = document.implementation.createDocument(null, null, null);
@@ -41,7 +41,7 @@ function RestNewdoodleController() {
                 xmlify("title", self.title()),
                 xmlify("description", self.description()),
                 xmlify("initator", xmlify("name", self.name())),
-                xmlify("options", opts)
+                xmlify("options", xmlify("option", "Opt1"))
                 );
 
         console.log(data);

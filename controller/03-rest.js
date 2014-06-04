@@ -1,7 +1,7 @@
 function RestController() {
     var self = this;
 
-    var doodleRestApiURL = "http://doodle-test.com/api1/WithoutAccessControl";
+    var doodleRestApiURL = "http://doodle-test.com/api1WithoutAccessControl";
     var pollURL = doodleRestApiURL + "/polls/";
 
 
@@ -29,7 +29,7 @@ function RestController() {
     };
 
     self.postPoll = function(data, successCB, errorCB) {
-        POST(pollURL, data, successCB, errorCB);
+        POST(pollURL, "", data, successCB, errorCB);
     };
 
     self.deletePoll = function(id, successCB, errorCB) {
@@ -85,8 +85,8 @@ function RestController() {
             type: 'POST',
             contentType: "application/xml",
             dataType: 'xml',
-            timeout: timeout,
-            data: "=" + postData,
+           // timeout: timeout,
+            data: postData.outerHTML,
             async: isAsync,
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
