@@ -30,7 +30,7 @@ function RestNewdoodleController() {
         data += "<levels>2</levels>";
         data += "<title>"+self.title()+"</title>";
         data += "<description>"+self.description()+"</description>";        
-        data += "<initator><name>"+self.name()+"</name></initator>";
+        data += "<initiator><name>"+self.name()+"</name></initiator>";
         data += "<options>";        
         ko.utils.arrayForEach(this.options(), function(opt) {
             data += "<option>" + opt.option + "</option>";
