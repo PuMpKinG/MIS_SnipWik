@@ -20,41 +20,101 @@ function RestNewdoodleController() {
 
     self.options.push({"id": 0, "option": "Huhn"});
     self.options.push({"id": 1, "option": "Ei"});
-
-    // rest poll call
-    self.createPoll = function() {
-
-        var doc = document.implementation.createDocument(null, null, null);
-
-        var opts = new Array();
+    
+    
+    self.createPoll = function(){
+        var xw = new XMLWriter('UTF-8');
         
-        ko.utils.arrayForEach(this.options(), function(opt) {
-            opts += xmlify("option", opt.option);
-        });
-
-        var doc = document.implementation.createDocument(null, null, null);
-
-        var data = xmlify("poll",
-                xmlify("type", "TEXT"),
-                xmlify("hidden", "false"),
-                xmlify("levels", "2"),
-                xmlify("title", self.title()),
-                xmlify("description", self.description()),
-                xmlify("initator", xmlify("name", self.name())),
-                xmlify("options", opts)
-                );
-
-        console.log(data);
-
-        app.rest.postPoll(data, 
+//        xw.formatting = 'indented';//add indentation and newlines
+//        xw.indentChar = ' ';//indent with spaces
+//        xw.indentation = 2;//add 2 spaces per level
+        
+        xw.writeStartDocument();
+        
+        xw.writeStartElement('poll');
+            xw.writeAttributeString( 'xmlns', 'http://doodle.com/xsd1');
+            xw.writeElementString('type', 'TEXT');
+            xw.writeElementString('hidden', 'false');
+            xw.writeElementString('levels', '2');
+            xw.writeElementString('title', self.title());
+            xw.writeElementString('description', self.description());
+            xw.writeStartElement('initiator');
+                xw.writeElementString('name', self.name());
+            xw.writeEndElement();
+            xw.writeStartElement('options');
+                ko.utils.arrayForEach(this.options(), function(opt) {
+                    xw.writeElementString('option', opt.option);
+                });
+            xw.writeEndElement();
+        xw.writeEndElement();
+        xw.writeEndDocument();
+        
+        var data = xw.getDocument();
+        
+        console.log(data); 
+        
+        //data.documentElement.outerHTML
+        app.rest.postPoll(xw.flush(), 
         function(data, jqXHR) {
             console.log("success push new doodle with answer: " + data);
             
         },
         function(jqXHR, jsonValue) {
-            console.log("error on push new doole: " + jsonValue);
+            console.log("error on push new doole: " + jqXHR.status + " -> " + jqXHR.responseText);
         });
-    };
+    }            
+    
+        /*
+     * <poll xmlns="http://doodle.com/xsd1"> 
+     <type>TEXT</type> 
+     <hidden>false</hidden> 
+     <levels>2</levels> 
+     <title>PPP</title> 
+     <description>yum!</description> 
+     <initiator> 
+     <name>Paul</name> 
+     </initiator> 
+     <options> 
+     <option>Pasta</option> 
+     <option>Pizza</option> 
+     Copyright © 2008-2012 Doodle AG 1.6.2 Page 4/9<option>Polenta</option> 
+     </options> 
+     </poll>
+     */
+    
+
+//    self.createPoll = function() {
+//        //var doc = document.implementation.createDocument(null, null, null);
+//
+//        var opts = "";
+//        
+//        ko.utils.arrayForEach(this.options(), function(opt) {
+//            opts += xmlify("option", opt.option).outerHTML;
+//        });
+//
+//        //var doc = document.implementation.createDocument(null, null, null);
+//
+//        var data = xmlify("poll",
+//                xmlify("type", "TEXT"),
+//                xmlify("hidden", "false"),
+//                xmlify("levels", "2"),
+//                xmlify("title", self.title()),
+//                xmlify("description", self.description()),
+//                xmlify("initator", xmlify("name", self.name())),
+//                xmlify("options", opts)
+//                );
+//
+//        console.log(data);
+//
+//        app.rest.postPoll(data, 
+//        function(data, jqXHR) {
+//            console.log("success push new doodle with answer: " + data);
+//            
+//        },
+//        function(jqXHR, jsonValue) {
+//            console.log("error on push new doole: " + jsonValue);
+//        });
+//    };
 
     var doc = document.implementation.createDocument(null, null, null);
 
@@ -73,24 +133,7 @@ function RestNewdoodleController() {
         return node;
     };
     
-       /*
-     * <poll xmlns="http://doodle.com/xsd1"> 
-     <type>TEXT</type> 
-     <hidden>false</hidden> 
-     <levels>2</levels> 
-     <title>PPP</title> 
-     <description>yum!</description> 
-     <initiator> 
-     <name>Paul</name> 
-     </initiator> 
-     <options> 
-     <option>Pasta</option> 
-     <option>Pizza</option> 
-     Copyright © 2008-2012 Doodle AG 1.6.2 Page 4/9<option>Polenta</option> 
-     </options> 
-     </poll>
-     */
-    
+   
     //save doodleID and Name in DB
     function savePoll() {
         var pollQuery = "INSERT INTO poll (id, name) VALUES (?, ?)";

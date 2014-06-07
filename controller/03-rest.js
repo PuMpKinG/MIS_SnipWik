@@ -1,7 +1,7 @@
 function RestController() {
     var self = this;
 
-    var doodleRestApiURL = "http://doodle-test.com/api1/WithoutAccessControl";
+    var doodleRestApiURL = "http://doodle-test.com/api1WithoutAccessControl";
     var pollURL = doodleRestApiURL + "/polls/";
 
 
@@ -29,7 +29,7 @@ function RestController() {
     };
 
     self.postPoll = function(data, successCB, errorCB) {
-        POST(pollURL, data, successCB, errorCB);
+        POST(pollURL, "", data, successCB, errorCB);
     };
 
     self.deletePoll = function(id, successCB, errorCB) {
@@ -48,7 +48,7 @@ function RestController() {
     };
 
     self.postParticipant = function(pollID, data, successCB, errorCB) {
-        POST(pollURL + pollID + "/participants/", "", data, successCB, errorCB);
+        POST(pollURL + pollID + "/participants/", "", data.outerHTML, successCB, errorCB);
     };
 
     self.deleteParticipant = function(pollID, participantID, successCB, errorCB) {
@@ -85,8 +85,7 @@ function RestController() {
             type: 'POST',
             contentType: "application/xml",
             dataType: 'xml',
-            timeout: timeout,
-            data: "=" + postData,
+            data: postData,
             async: isAsync,
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
@@ -104,8 +103,7 @@ function RestController() {
             type: 'PUT',
             contentType: "application/xml",
             dataType: 'xml',
-            timeout: timeout,
-            data: "=" + putData,
+            data: putData,
             async: isAsync,
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
@@ -122,7 +120,6 @@ function RestController() {
             url: url + urlExtra,
             type: 'DELETE',
             dataType: "application/xml",
-            timeout: timeout,
             async: isAsync,
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
@@ -132,5 +129,7 @@ function RestController() {
         });
     };
 
+
+    
 
 }
