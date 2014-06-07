@@ -11,10 +11,6 @@ var DB = (function() {
     }
 
     function createTablesIfExist(tx) {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS search_history_local (id INTEGER NOT NULL PRIMARY KEY, search_string TEXT, search_time DATE)', [], function() {
-
-        });
-
         tx.executeSql('CREATE TABLE IF NOT EXISTS solution (id INTEGER NOT NULL PRIMARY KEY, name TEXT not null, description TEXT)', [], function() {
             tx.executeSql('INSERT INTO solution (id, name, description) VALUES (1, "Quick Sort Algorithmus", "Quicksort (engl. quick ‚schnell‘ und to sort ‚sortieren‘) ist ein schneller, rekursiver, nicht-stabiler Sortieralgorithmus, der nach dem Prinzip Teile und herrsche (lat. Divide et impera!, engl. divide and conquer) arbeitet.")');
             tx.executeSql('INSERT INTO solution (id, name, description) VALUES (2, "Bubble Sort Algorithmus", "Bubblesort (auch Sortieren durch Aufsteigen) ist ein Algorithmus, der vergleichsbasiert eine Liste von Elementen sortiert. Dieses Sortierverfahren arbeitet in-place, sortiert stabil und hat eine Laufzeit von \mathcal{O}(n^2) im schlimmsten (Worst-Case) wie auch im durchschnittlichen Fall (Average-Case)")');
@@ -39,8 +35,8 @@ var DB = (function() {
         });
         
          tx.executeSql('CREATE TABLE IF NOT EXISTS poll (id INTEGER NOT NULL PRIMARY KEY, name TEXT not null)', [], function() {
-            tx.executeSql('INSERT INTO poll (id, name) VALUES (1, "Umfrage 1",');
-            tx.executeSql('INSERT INTO poll (id, name) VALUES (2, "Umfrage 2", ');
+            tx.executeSql('INSERT INTO poll (id, name) VALUES (1, "Umfrage 1")');
+            tx.executeSql('INSERT INTO poll (id, name) VALUES (2, "Umfrage 2")');
         });
     }
 

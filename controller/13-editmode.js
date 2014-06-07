@@ -5,7 +5,7 @@ function EditmodeController() {
     self.solution = ko.observable();
     self.details = ko.observableArray();
 
-    self.savData = function() {
+    self.saveData = function() {
         saveSolution();
         saveDetails();
 

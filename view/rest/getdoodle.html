@@ -7,11 +7,10 @@
             <label class="control-label" for="selectforAnswer">Umfrage auswählen</label>
             <div class="controls">
                 <select id="selectforAnswer" name="selectforAnswer" class="input-xlarge" data-bind="foreach: polls, value: selectedPoll, event:{ change: selectedPollChanged }">
-                    <option data-bind="hmtl: name"></option>
+                    <option data-bind="hmtl: name, value: id"></option>
                 </select>
             </div>
         </div>
-
 
         <div class="container restOption" >
             <div class="whatDoTitle row">Informationen zum gewählten Doodle:</div>
@@ -59,7 +58,7 @@
              <div class="row optionrow" >
                 <div class="col-xs-12" data-bind="foreach: participants">
                     <div class="row">
-                        <div class="col-xs-3 fieldTitle" data-bind="html: name"></div>
+                        <div class="col-xs-3 fieldTitle" data-bind="html: pname"></div>
                         <div class="col-xs-9 fieldInput">
                             <span data-bind="html: printSelected" class="col-xs-12">
                         </div>

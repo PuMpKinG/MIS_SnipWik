@@ -9,7 +9,7 @@
                 <div class="col-xs-5 fieldTitle">Umfrage wählen:</div>
                 <div class="col-xs-9 fieldInput"> 
                     <select id="selectforAnswer" name="selectforAnswer" class="input-xlarge" data-bind="foreach: polls, value: selectedPoll">
-                        <option data-bind="html: name"></option>
+                        <option data-bind="html: name, value: id"></option>
                     </select>
                 </div>
             </div>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="row fieldrow">
-                <div class="col-xs-3 fieldTitle">Name:</div>
+                <div class="col-xs-3 fieldTitle">Autor:</div>
                 <div class="col-xs-9 fieldInput">
                     <span data-bind="html: name" class="col-xs-12">
                 </div>
@@ -50,7 +50,8 @@
                  <div class="fieldTitle col-xs-12" >Bitte Antwort auswählen:</div>
                 <div class="col-xs-12" data-bind="foreach: options">
                     <div class="row">
-                        <input class="col-xs-12" type="checkbox" name="selectedAnswer" data-bind="value: name, html: name">
+                        <span data-bind="html: name" class="col-xs-6"></span>
+                        <input class="col-xs-6" type="checkbox" name="selectedAnswer" data-bind="value: name">                        
                     </div>
                 </div>
                
