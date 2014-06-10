@@ -7,8 +7,8 @@ function RestNewdoodleController() {
     var location = "internet";
 
     self.id = ko.observable();
-    self.title = ko.observable("Test");
-    self.description = ko.observable("Test-Umfrage");
+    self.title = ko.observable("Huhn-Ei-Umfrage");
+    self.description = ko.observable("Was war zuerst da?");
     self.name = ko.observable("Ich");
     self.email = ko.observable("Ich@ich.de");
     self.options = ko.observableArray();
@@ -54,18 +54,31 @@ function RestNewdoodleController() {
         console.log(data); 
         
         //data.documentElement.outerHTML
-        app.rest.postPoll(data, 
-        function(data, jqXHR) {
-            console.log("success push new doodle with answer: " + data);
-            
+        app.rest.postPoll(xw.flush(), 
+        function(xdoodleKey, doodleLocationId, jqXHR) {
+            console.log("created doodle location id: " + doodleLocationId);
+            self.id(doodleLocationId);
+            self.savePoll();
         },
         function(jqXHR, jsonValue) {
             console.log("error on push new doole: " + jsonValue);
+            alert("Error on creating new Doodle: " + jsonValue);
         });
     };
 
-
-//    // rest poll call
+    //save doodleID and Name in DB
+    self.savePoll = function () {
+        // TODO: Id und X-Doodle Key müssen gespeichert werden.
+        var pollQuery = "INSERT INTO poll (id, name) VALUES (?,?)";
+        app.db.query(pollQuery, [self.id(), self.title()]);
+    };
+    
+    self.initController = function() {
+            
+    };
+    
+    
+    //    // rest poll call
 //    self.createPoll = function() {
 //        var data = "<?xml version='1.0' encoding='UTF-8'?>";
 //        data += "<poll xmlns='http://doodle.com/xsd1'>";
@@ -151,32 +164,21 @@ function RestNewdoodleController() {
 //        });
 //    };
 
-    var doc = document.implementation.createDocument(null, null, null);
-
-    function xmlify() {
-        var node = doc.createElement(arguments[0]), text;
-
-        for (var i = 1; i < arguments.length; i++) {
-            if (typeof arguments[i] == 'string') {
-                node.appendChild(doc.createTextNode(arguments[i]));
-            }
-            else {
-                node.appendChild(arguments[i]);
-            }
-        }
-
-        return node;
-    };
-
-    //save doodleID and Name in DB
-    self.savePoll = function () {
-        // TODO: Id und X-Doodle Key müssen gespeichert werden.
-        var pollQuery = "INSERT INTO poll (id, name) VALUES (?, ?)";
-        app.db.query(pollQuery, [self.id(), self.name()]);
-    };
-    
-    self.initController = function() {
-            
-    };
+//    var doc = document.implementation.createDocument(null, null, null);
+//
+//    function xmlify() {
+//        var node = doc.createElement(arguments[0]), text;
+//
+//        for (var i = 1; i < arguments.length; i++) {
+//            if (typeof arguments[i] == 'string') {
+//                node.appendChild(doc.createTextNode(arguments[i]));
+//            }
+//            else {
+//                node.appendChild(arguments[i]);
+//            }
+//        }
+//
+//        return node;
+//    };
 }
 

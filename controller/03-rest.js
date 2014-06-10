@@ -90,7 +90,10 @@ function RestController() {
             data: postData,
             async: isAsync
         }).done(function(data, status, jqXHR) {
-            successCB(data, jqXHR);
+            console.log("push answer header: " + jqXHR.getAllResponseHeaders());
+            var xdoodleKey = jqXHR.getResponseHeader('X-DoodleKey');
+            var doodleLocationId = jqXHR.getResponseHeader('Content-Location');
+            successCB(xdoodleKey, doodleLocationId, jqXHR);
         }).fail(function(jqXHR) {
             var jsonValue = jqXHR.responseText != "" ? jqXHR.responseText : emptyResponse;
             errorCB(jqXHR, jsonValue);

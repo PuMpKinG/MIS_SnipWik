@@ -34,9 +34,12 @@ var DB = (function() {
             tx.executeSql('INSERT INTO solution_detail (id, detail_type_id, solution_id, content) VALUES (8, 4, 2, "JavaCode")');
         });
         
-         tx.executeSql('CREATE TABLE IF NOT EXISTS poll (id INTEGER NOT NULL PRIMARY KEY, name TEXT not null)', [], function() {
-            tx.executeSql('INSERT INTO poll (id, name) VALUES (1, "Umfrage 1")');
-            tx.executeSql('INSERT INTO poll (id, name) VALUES (2, "Umfrage 2")');
+//        tx.executeSql('DROP TABLE poll', [], function(){
+//            
+//        });
+        
+        tx.executeSql('CREATE TABLE IF NOT EXISTS poll (id TEXT NOT NULL PRIMARY KEY, name TEXT not null)', [], function() {
+            tx.executeSql('INSERT INTO poll (id, name) VALUES ("p9aaknkevwhw3sxw", "Umfrage 1")');
         });
     }
 
