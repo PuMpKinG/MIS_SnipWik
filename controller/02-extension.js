@@ -31,6 +31,32 @@ String.prototype.equals = function (otherString) {
     return this == otherString;
 };
 
+String.prototype.encode_utf8 = function() {
+    // dient der Normalisierung des Zeilenumbruchs
+    rohtext = this;
+    rohtext = rohtext.replace(/\r\n/g, "\n");
+    var utftext = "";
+    for (var n = 0; n < rohtext.length; n++)
+    {
+        // ermitteln des Unicodes des  aktuellen Zeichens
+        var c = rohtext.charCodeAt(n);
+        // alle Zeichen von 0-127 => 1byte
+        if (c < 128)
+            utftext += String.fromCharCode(c);
+        // alle Zeichen von 127 bis 2047 => 2byte
+        else if ((c > 127) && (c < 2048)) {
+            utftext += String.fromCharCode((c >> 6) | 192);
+            utftext += String.fromCharCode((c & 63) | 128);
+        }
+        // alle Zeichen von 2048 bis 66536 => 3byte
+        else {
+            utftext += String.fromCharCode((c >> 12) | 224);
+            utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+            utftext += String.fromCharCode((c & 63) | 128);
+        }
+    }
+    return utftext;
+}
 
 /**** Array extensions ***/
 

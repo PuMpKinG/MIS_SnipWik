@@ -3,16 +3,21 @@
 
         <h1>Doodle Umfrage</h1>
         
-        <div class="control-group">
-            <label class="control-label" for="selectforAnswer">Umfrage auswählen</label>
-            <div class="controls">
-                <select id="selectforAnswer" name="selectforAnswer" class="input-xlarge" data-bind="foreach: polls, value: selectedPoll, event:{ change: selectedPollChanged }">
-                    <option data-bind="hmtl: name, value: id"></option>
+        <div class="control-group container">
+            <label class="control-label row" for="selectforAnswer">Umfrage auswählen</label>
+            <div class="row">
+            <div class="controls col-xs-6">
+                <select id="selectforAnswer" name="selectforAnswer" class="input-xlarge" data-bind="
+                       options: polls,
+                       optionsText: 'pollName',
+                       value: selectedPoll">
                 </select>
             </div>
-        </div>
+            <button class="btn btn-primary okBtn col-xs-5" data-bind="click: selectedPollChanged">Abrufen</button>
+       </div>
+            </div>
 
-        <div class="container restOption" >
+        <div class="container restOption" style="margin-bottom: 30px" >
             <div class="whatDoTitle row">Informationen zum gewählten Doodle:</div>
             <div class="row fieldrow">
                 <div class="col-xs-3 fieldTitle">Titel:</div>

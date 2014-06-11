@@ -5,6 +5,7 @@ function RestController() {
     var pollURL = doodleRestApiURL + "/polls";
 
 
+
     //Description:  http://doodle.com/xsd1/RESTfulDoodle.pdf
     // levels (e.g., „levels=2“ for a Yes-No poll and „levels=3“ for a Yes-No-Ifneedbe poll, default: 2) 
     // locale (e.g., „locale=de“ or „locale=en“) 
@@ -32,10 +33,8 @@ function RestController() {
         POST(pollURL, "", data, successCB, errorCB);
     };
 
-    self.deletePoll = function(id, successCB, errorCB) {
-        if (typeof id !== "number" && !isNaN(id))
-            throw "id is not a valid number!";
-        DELETE(pollURL + "/" + id ,"", successCB, errorCB);
+    self.deletePoll = function(pollOb, successCB, errorCB) {
+        DELETE(pollURL + "/" + pollOb.pollId ,"", successCB, errorCB, false, pollOb.doodleKey);
     };
 
     /***********************************************/
@@ -49,6 +48,7 @@ function RestController() {
 
     self.postParticipant = function(pollID, data, successCB, errorCB) {
         POST(pollURL + "/" + pollID + "/participants", "", data, successCB, errorCB);
+
     };
 
     self.deleteParticipant = function(pollID, participantID, successCB, errorCB) {
@@ -72,7 +72,7 @@ function RestController() {
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
         }).fail(function(jqXHR) {
-            var jsonValue = jqXHR.responseText != "" ? jqXHR.responseText : emptyResponse;
+            var jsonValue = jqXHR.responseText;
             errorCB(jqXHR, jsonValue);
         });
     };
@@ -85,13 +85,15 @@ function RestController() {
             type: 'POST',
             contentType: "application/xml",
             dataType: 'xml',
-           // timeout: timeout,
             data: postData,
             async: isAsync
         }).done(function(data, status, jqXHR) {
-            successCB(data, jqXHR);
+            console.log("push answer header: " + jqXHR.getAllResponseHeaders());
+            var xdoodleKey = jqXHR.getResponseHeader('X-DoodleKey');
+            var doodleLocationId = jqXHR.getResponseHeader('Content-Location');
+            successCB(xdoodleKey, doodleLocationId, jqXHR);
         }).fail(function(jqXHR) {
-            var jsonValue = jqXHR.responseText != "" ? jqXHR.responseText : emptyResponse;
+            var jsonValue = jqXHR.responseTex;
             errorCB(jqXHR, jsonValue);
         });
     };
@@ -104,17 +106,17 @@ function RestController() {
             type: 'PUT',
             contentType: "application/xml",
             dataType: 'xml',
-            data: "=" + putData,
+            data: putData,
             async: isAsync,
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
         }).fail(function(jqXHR, status) {
-            var jsonValue = jqXHR.responseText != "" ? jqXHR.responseText : emptyResponse;
+            var jsonValue = jqXHR.responseText;
             errorCB(jqXHR, jsonValue);
         });
     };
 
-    var DELETE = function(url, urlExtra, successCB, errorCB, synchron) {
+    var DELETE = function(url, urlExtra, successCB, errorCB, synchron, doodleKey) {
         var isAsync = synchron ? false : true;
         console.log("ajax delete url: " + url + urlExtra);
         $.ajax({
@@ -122,13 +124,16 @@ function RestController() {
             type: 'DELETE',
             dataType: "application/xml",
             async: isAsync,
+            headers: { 'X-DoodleKey': doodleKey }
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
         }).fail(function(jqXHR) {
-            var jsonValue = jqXHR.responseText != "" ? jqXHR.responseText : emptyResponse;
+            var jsonValue = jqXHR.responseText;
             errorCB(jqXHR, jsonValue);
         });
     };
 
+
+    
 
 }

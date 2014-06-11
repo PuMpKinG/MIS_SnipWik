@@ -8,10 +8,13 @@
             <div class="row fieldrow">
                 <div class="col-xs-5 fieldTitle">Umfrage wählen:</div>
                 <div class="col-xs-9 fieldInput"> 
-                    <select id="selectforAnswer" name="selectforAnswer" class="input-xlarge" data-bind="foreach: polls, value: selectedPoll">
-                        <option data-bind="html: name, value: id"></option>
+                     <select id="selectforAnswer" name="selectforAnswer" class="input-xlarge" data-bind="
+                       options: polls,
+                       optionsText: 'pollName',
+                       value: selectedPoll">
                     </select>
                 </div>
+                 <button class="btn btn-primary okBtn col-xs-5" data-bind="click: selectedPollChanged">Abrufen</button>
             </div>
             
           
@@ -58,7 +61,7 @@
             </div>
            
             
-            <button class="btn btn-primary okBtn" data-bind="click: sendAnswer">Erstellen</button>
+            <button class="btn btn-primary okBtn" style="margin-bottom: 50px"  data-bind="click: sendAnswer">Erstellen</button>
         </div>
         
         <!-- *********************  Footer Template 1 ******************************** -->
