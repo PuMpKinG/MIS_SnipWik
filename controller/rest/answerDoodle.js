@@ -14,7 +14,12 @@ function RestAnswerdoodleController() {
     self.personName = ko.observable();
     self.answerOptions = new Array();
 
-    self.selectedPoll = ko.observable();
+     self.selectedPoll = ko.observable();
+    
+    var ObservablePoll = function(id, name){
+        this.pollName = name;
+        this.pollId = id;
+    };
 
     function getAnswerCheckboxes(chkboxName) {
         var checkboxes = document.getElementsByName(chkboxName);
@@ -43,7 +48,7 @@ function RestAnswerdoodleController() {
 
         console.log(data);
 
-        app.rest.postParticipant(self.selectedPoll(), data,
+        app.rest.postParticipant(self.selectedPoll().pollId, data,
                 function(data, jqXHR) {
                     console.log("success push new participant for poll with id: " + self.id() + ", data: " + data);
 
@@ -55,10 +60,19 @@ function RestAnswerdoodleController() {
 
     self.initController = function() {
         self.loadPoll();
+        self.selectedPoll(self.polls()[0]);
+        //var testData = "<?xml version='1.0' encoding='UTF-8'?><poll xmlns='http://doodle.com/xsd1'><latestChange>2014-06-04T23:17:19+02:00</latestChange><type>TEXT</type><extensions/><hidden>false</hidden><writeOnce>false</writeOnce><requireAddress>false</requireAddress><requireEMail>false</requireEMail><requirePhone>false</requirePhone><byInvitationOnly>false</byInvitationOnly><levels>2</levels><state>OPEN</state><language>en</language><title>Test</title><description>Test-Umfrage</description><initiator><name>Ich</name><userId></userId><eMailAddress></eMailAddress></initiator><options><option>Huhn</option><option>Ei</option></options><participants nrOf='0'></participants><comments nrOf='0'></comments><features></features></poll>";
         
-        var testData = "<?xml version='1.0' encoding='UTF-8'?><poll xmlns='http://doodle.com/xsd1'><latestChange>2014-06-04T23:17:19+02:00</latestChange><type>TEXT</type><extensions/><hidden>false</hidden><writeOnce>false</writeOnce><requireAddress>false</requireAddress><requireEMail>false</requireEMail><requirePhone>false</requirePhone><byInvitationOnly>false</byInvitationOnly><levels>2</levels><state>OPEN</state><language>en</language><title>Test</title><description>Test-Umfrage</description><initiator><name>Ich</name><userId></userId><eMailAddress></eMailAddress></initiator><options><option>Huhn</option><option>Ei</option></options><participants nrOf='0'></participants><comments nrOf='0'></comments><features></features></poll>";
+        //self.parsePoll(testData);
+    };
+    
+    self.selectedPollChanged = function() {    
+        self.options.removeAll();
         
-        self.parsePoll(testData);
+        console.log("selected poll:" + self.selectedPoll().pollId);
+        app.rest.getPoll(self.selectedPoll().pollId, function(data) {
+            self.parsePoll(data);
+        });
     };
 
     self.parsePoll = function(data) {
@@ -77,9 +91,9 @@ function RestAnswerdoodleController() {
             var len = results.rows.length;
             for (var rowIndex = 0; rowIndex < len; rowIndex++) {
                 var row = results.rows.item(rowIndex);
-                self.polls.push({"id": rowIndex, "name": row.name});
+                self.polls.push(new ObservablePoll(row.id, row.name));
             }
         });
-    }
+    };
 }
 

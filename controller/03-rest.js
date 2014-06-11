@@ -74,7 +74,7 @@ function RestController() {
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
         }).fail(function(jqXHR) {
-            var jsonValue = jqXHR.responseText != "" ? jqXHR.responseText : emptyResponse;
+            var jsonValue = jqXHR.responseText;
             errorCB(jqXHR, jsonValue);
         });
     };
@@ -95,7 +95,7 @@ function RestController() {
             var doodleLocationId = jqXHR.getResponseHeader('Content-Location');
             successCB(xdoodleKey, doodleLocationId, jqXHR);
         }).fail(function(jqXHR) {
-            var jsonValue = jqXHR.responseText != "" ? jqXHR.responseText : emptyResponse;
+            var jsonValue = jqXHR.responseTex;
             errorCB(jqXHR, jsonValue);
         });
     };
@@ -113,7 +113,7 @@ function RestController() {
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
         }).fail(function(jqXHR, status) {
-            var jsonValue = jqXHR.responseText != "" ? jqXHR.responseText : emptyResponse;
+            var jsonValue = jqXHR.responseText;
             errorCB(jqXHR, jsonValue);
         });
     };
@@ -129,7 +129,7 @@ function RestController() {
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
         }).fail(function(jqXHR) {
-            var jsonValue = jqXHR.responseText != "" ? jqXHR.responseText : emptyResponse;
+            var jsonValue = jqXHR.responseText;
             errorCB(jqXHR, jsonValue);
         });
     };

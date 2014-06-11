@@ -13,8 +13,15 @@ function RestDeletedoodleController() {
         }); 
     };
     
+     var ObservablePoll = function(id, name){
+        this.pollName = name;
+        this.pollId = id;
+    };
+
+    
     self.initController = function() {
         self.loadPoll();
+        self.selectedPoll(self.polls()[0]);
     };
     
     self.loadPoll = function() {

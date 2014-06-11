@@ -7,8 +7,10 @@
             <label class="control-label row" for="selectforAnswer">Umfrage auswählen</label>
             <div class="row">
             <div class="controls col-xs-6">
-                <select id="selectforAnswer" name="selectforAnswer" class="input-xlarge" data-bind="foreach: polls, value: selectedPoll">
-                    <option data-bind="text: name, value: id"></option>
+                <select id="selectforAnswer" name="selectforAnswer" class="input-xlarge" data-bind="
+                       options: polls,
+                       optionsText: 'pollName',
+                       value: selectedPoll">
                 </select>
             </div>
             <button class="btn btn-primary okBtn col-xs-5" data-bind="click: selectedPollChanged">Abrufen</button>

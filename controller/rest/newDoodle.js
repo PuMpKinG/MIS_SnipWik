@@ -15,7 +15,6 @@ function RestNewdoodleController() {
 
     self.addOption = function() {
         self.options.push({"id": this.options().length, "option": ""});
-        
     };
 
     self.options.push({"id": 0, "option": "Huhn"});
@@ -70,7 +69,7 @@ function RestNewdoodleController() {
     self.savePoll = function () {
         // TODO: Id und X-Doodle Key müssen gespeichert werden.
         var pollQuery = "INSERT INTO poll (id, name) VALUES (?,?)";
-        app.db.query(pollQuery, [self.id(), self.title()]);
+        app.db.query(pollQuery, [self.id(), self.title()], function(){});
     };
     
     self.initController = function() {
