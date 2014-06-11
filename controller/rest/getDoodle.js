@@ -29,7 +29,7 @@ function RestGetdoodleController() {
         //<option>1</option>
         var idx = 0;
         options.forEach(function(option) {
-            if (option == 1) {
+            if (option == "1") {
                 obsPar.printSelected += self.options()[idx].option + " ";
             }
             idx++;
@@ -70,8 +70,7 @@ function RestGetdoodleController() {
                 self.options.push({"id": self.options().length, "option": item});
             });            
             $.each(xml.participants, function(i, item){
-                if(! typeof item === 'string')
-                    self.participants.push(new ObservableParticipant(item.id, item.name, item.userId, item.preferences.option));
+                self.participants.push(new ObservableParticipant(item.id, item.name, item.userId, item.preferences.option));
             });
     };
 

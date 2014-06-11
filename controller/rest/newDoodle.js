@@ -57,7 +57,8 @@ function RestNewdoodleController() {
         function(xdoodleKey, doodleLocationId, jqXHR) {
             console.log("created doodle location id: " + doodleLocationId);
             self.id(doodleLocationId);
-            self.savePoll();
+            self.savePoll(xdoodleKey);
+            
         },
         function(jqXHR, jsonValue) {
             console.log("error on push new doole: " + jsonValue);
@@ -66,10 +67,11 @@ function RestNewdoodleController() {
     };
 
     //save doodleID and Name in DB
-    self.savePoll = function () {
-        // TODO: Id und X-Doodle Key müssen gespeichert werden.
-        var pollQuery = "INSERT INTO poll (id, name) VALUES (?,?)";
-        app.db.query(pollQuery, [self.id(), self.title()], function(){});
+    self.savePoll = function (xDoodleKey) {
+        var pollQuery = "INSERT INTO poll (id, name, doodleKey) VALUES (?,?,?)";
+        app.db.query(pollQuery, [self.id(), self.title(), xDoodleKey], function(){
+            alert("new poll saved, id: " + self.id());
+        });
     };
     
     self.initController = function() {

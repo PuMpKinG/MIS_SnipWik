@@ -14,7 +14,7 @@ function HeaderController() {
     self.password = ko.observable("Test");
 
     self.departments = ko.observableArray();
-    
+
     self.loggedInPersonPhoto = ko.observable("css/img/profile_icon.png");
 
     //css style of button
@@ -23,7 +23,7 @@ function HeaderController() {
 
     self.isPencilVisible = ko.observable(false);
     self.isHistoryVisible = ko.observable(false);
-    
+
     self.isSearchVisible = ko.observable(false);
 
     /***********************************************/
@@ -92,11 +92,11 @@ function HeaderController() {
             app.navigateBack();
         }
     }
-    
-    self.navToClient = function(navController){
+
+    self.navToClient = function(navController) {
         self.optionBtnClick();
         app.navigateTo(navController);
-        
+
     }
 
 
@@ -164,14 +164,6 @@ function HeaderController() {
                 self.isSearchVisible(true);
                 app.headerTitleText("Einstellungen");
                 break;
-            case "RestclientController":
-                self.headerLeftIcon("fa fa-chevron-left");
-                self.headerMiddleSpace("col-xs-11");
-                self.isPencilVisible(false);
-                self.isHistoryVisible(false);
-                self.isSearchVisible(false);
-                app.headerTitleText("REST");
-                break;
             case "SoapclientController":
                 self.headerLeftIcon("fa fa-chevron-left");
                 self.headerMiddleSpace("col-xs-11");
@@ -179,6 +171,38 @@ function HeaderController() {
                 self.isHistoryVisible(false);
                 self.isSearchVisible(false);
                 app.headerTitleText("SOAP");
+                break;
+            case "RestAnswerdoodleController":
+                self.headerLeftIcon("fa fa-chevron-left");
+                self.headerMiddleSpace("col-xs-11");
+                self.isPencilVisible(false);
+                self.isHistoryVisible(false);
+                self.isSearchVisible(false);
+                app.headerTitleText("REST");
+                break;
+            case "RestDeletedoodleController":
+                self.headerLeftIcon("fa fa-chevron-left");
+                self.headerMiddleSpace("col-xs-11");
+                self.isPencilVisible(false);
+                self.isHistoryVisible(false);
+                self.isSearchVisible(false);
+                app.headerTitleText("REST");
+                break;
+            case "RestGetdoodleController":
+                self.headerLeftIcon("fa fa-chevron-left");
+                self.headerMiddleSpace("col-xs-11");
+                self.isPencilVisible(false);
+                self.isHistoryVisible(false);
+                self.isSearchVisible(false);
+                app.headerTitleText("REST");
+                break;
+            case "RestNewdoodleController":
+                self.headerLeftIcon("fa fa-chevron-left");
+                self.headerMiddleSpace("col-xs-11");
+                self.isPencilVisible(false);
+                self.isHistoryVisible(false);
+                self.isSearchVisible(false);
+                app.headerTitleText("REST");
                 break;
         }
     }
@@ -193,12 +217,12 @@ function HeaderController() {
         self.nobodyIsLoggedIn(true);
 
     };
-    
+
     self.refreshCotroller = function() {
         initButtons();
     }
-    
- 
+
+
     self.departments.push(new ObservableDepartment("Praktikum 3", [{"name": "Soap-Client", "nav": "soapclient"}, {"name": "Rest-Client", "nav": "restclient"}]));
 
 }

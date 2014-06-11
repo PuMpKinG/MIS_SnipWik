@@ -33,10 +33,8 @@ function RestController() {
         POST(pollURL, "", data, successCB, errorCB);
     };
 
-    self.deletePoll = function(id, successCB, errorCB) {
-        if (typeof id !== "number" && !isNaN(id))
-            throw "id is not a valid number!";
-        DELETE(pollURL + "/" + id ,"", successCB, errorCB);
+    self.deletePoll = function(pollOb, successCB, errorCB) {
+        DELETE(pollURL + "/" + pollOb.pollId ,"", successCB, errorCB, false, pollOb.doodleKey);
     };
 
     /***********************************************/
@@ -118,7 +116,7 @@ function RestController() {
         });
     };
 
-    var DELETE = function(url, urlExtra, successCB, errorCB, synchron) {
+    var DELETE = function(url, urlExtra, successCB, errorCB, synchron, doodleKey) {
         var isAsync = synchron ? false : true;
         console.log("ajax delete url: " + url + urlExtra);
         $.ajax({
@@ -126,6 +124,7 @@ function RestController() {
             type: 'DELETE',
             dataType: "application/xml",
             async: isAsync,
+            headers: { 'X-DoodleKey': doodleKey }
         }).done(function(data, status, jqXHR) {
             successCB(data, jqXHR);
         }).fail(function(jqXHR) {

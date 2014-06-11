@@ -16,9 +16,10 @@ function RestAnswerdoodleController() {
 
      self.selectedPoll = ko.observable();
     
-    var ObservablePoll = function(id, name){
+    var ObservablePoll = function(id, name, key){
         this.pollName = name;
         this.pollId = id;
+        this.doodleKey = key;
     };
 
     function getAnswerCheckboxes(chkboxName) {
@@ -51,10 +52,11 @@ function RestAnswerdoodleController() {
         app.rest.postParticipant(self.selectedPoll().pollId, data,
                 function(data, jqXHR) {
                     console.log("success push new participant for poll with id: " + self.id() + ", data: " + data);
-
+                    alert("answer ok");
                 },
                 function(jqXHR, jsonValue) {
                     console.log("error push new participant for poll with id: " + self.id() +"error: " + jsonValue);
+                    alert("answer failed");
                 });
     };
 
@@ -91,7 +93,7 @@ function RestAnswerdoodleController() {
             var len = results.rows.length;
             for (var rowIndex = 0; rowIndex < len; rowIndex++) {
                 var row = results.rows.item(rowIndex);
-                self.polls.push(new ObservablePoll(row.id, row.name));
+                self.polls.push(new ObservablePoll(row.id, row.name, row.doodleKey));
             }
         });
     };

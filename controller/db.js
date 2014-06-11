@@ -36,9 +36,9 @@ var DB = (function() {
         
 
         
-        tx.executeSql('CREATE TABLE IF NOT EXISTS poll (id TEXT NOT NULL PRIMARY KEY, name TEXT not null)', [], function() {
-            tx.executeSql('INSERT INTO poll (id, name) VALUES ("p9aaknkevwhw3sxw", "Umfrage 1")');
-        });
+//        tx.executeSql('CREATE TABLE IF NOT EXISTS poll (id TEXT NOT NULL PRIMARY KEY, name TEXT not null)', [], function() {
+//            tx.executeSql('INSERT INTO poll (id, name) VALUES ("p9aaknkevwhw3sxw", "Umfrage 1")');
+//        });
     }
 
     function errorCB(error) {
