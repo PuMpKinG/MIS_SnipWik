@@ -15,7 +15,7 @@ function ConfigurationController() {
     
     self.fillPollWithTestData = function() {
         var query = 'INSERT INTO poll (id, name, doodleKey) VALUES (?, ?, ?)';
-        app.db.query(query, ["d5ffkks7yfxavd6w", "Test", "883pku42"], function(){});
+        app.db.query(query, ["drhy5z3ffmanbzav ", "MIS Umfrage", "ndpz3mib"], function(){});
         alert("Table Poll filled with test-value");
     };
 

@@ -69,7 +69,7 @@ function RestGetdoodleController() {
             $.each(xml.options.option, function(i, item){
                 self.options.push({"id": self.options().length, "option": item});
             });            
-            $.each(xml.participants, function(i, item){
+            $.each(xml.participants.participant, function(i, item){
                 self.participants.push(new ObservableParticipant(item.id, item.name, item.userId, item.preferences.option));
             });
     };
