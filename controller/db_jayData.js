@@ -120,11 +120,38 @@ var DB = (function() {
             $org.context.saveChanges(); // push to DB
 
             //var promise = $org.context.Solution.filter( function (item) {return item.Name== this.solutionName;}, {solutionName: 'Quick Sort Algorithmus'});
-            $org.context.Solution.toArray().then ( function (solution) {console.dir(solution)});
+            //$org.context.Solution.toArray().then ( function (solution) {console.dir(solution)});
             //console.dir(promise);
 
-        });
+            var dataOutput = [];
+            dataOutput.push('"Id";"Name";"Desc"'); // title bar
+            //var dataOut = '"Id","Name","Desc"';
+            var d = $org.context.Solution.toArray();
+            d.then(function(taskArray) {
+                taskArray.forEach(function(task) {
+                    dataOutput.push('"' + task.Id + '";"' + task.Name + '";"' + task.Desc + '"');
 
+                });
+
+                exportCsv(dataOutput);
+
+            });
+
+            console.dir(dataOutput);
+
+        });
+    }
+
+    function exportCsv(csvArray) {
+
+
+        var a = document.createElement('a');
+        a.href     = 'data:application/csv;charset=utf-8,' + csvArray.join("%0A");
+        a.target   = '_blank';
+        a.download = 'mis.csv';
+        //a.text      = 'CSV Download';
+        document.body.appendChild(a);
+        a.click(); // start download
     }
 
 //    function createTablesIfExist(tx) {
