@@ -41,12 +41,13 @@ function RestGetdoodleController() {
         this.pollId = id;
     };
 
-    self.selectedPollChanged = function() {    
+    self.selectedPollChanged = function() {
+        
         self.options.removeAll();
         self.participants.removeAll();
         
         console.log("selected poll:" + self.selectedPoll().pollId);
-        app.rest.getPoll(self.selectedPoll().pollId, function(data) {
+        app.smartService.getItems(self.selectedPoll().pollId, function(data) {
             self.parsePoll(data);
         });
     };
