@@ -4,6 +4,8 @@ function StartpageController(){
     self.searchKeyword = ko.observable();
     self.searchRequestStarted = ko.observable(false);
     self.historyEntries = ko.observableArray();
+    self.btnOnlineTxt = ko.observable("Online");
+    self.onlineState = ko.observable(true);
     
     self.find = function(){
         app.navigateTo("searchresult");
@@ -19,6 +21,20 @@ function StartpageController(){
     
     self.navToConfig = function(){
         app.navigateTo("configuration")
+    };
+    
+    self.switchMode = function() {
+        if (self.onlineState()) {
+            self.btnOnlineTxt("Offline");
+            self.onlineState(false);
+            
+            app.smartService.ConnectionStateChanged(0);
+        } else {
+            self.btnOnlineTxt("Online");
+            self.onlineState(true);
+            
+            app.smartService.ConnectionStateChanged(1);
+        }
     };
     
     self.initController = function(){
