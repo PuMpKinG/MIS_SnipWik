@@ -116,9 +116,9 @@ function HeaderController() {
     /***********************************************/
     initButtons = function() {
 
-        var controllerName = "";
-        if (app.getCurrentController()) {
-            app.getCurrentController().constructor.name;
+        var controllerName = "StartpageController";
+        if (app.getCurrentController().constructor) {
+            controllerName = app.getCurrentController().constructor.name;
         }
         
         switch (controllerName) {
@@ -209,14 +209,8 @@ function HeaderController() {
                 self.isSearchVisible(false);
                 app.headerTitleText("REST");
                 break;
-            default:
-                self.headerLeftIcon("fa fa-bars");
-                self.headerMiddleSpace("col-xs-11");
-                self.isPencilVisible(false);
-                self.isHistoryVisible(false);
-                self.isSearchVisible(false);
         }
-    }
+    };
 
     self.initController = function() {
         self.loggedInPersonData({
@@ -231,7 +225,7 @@ function HeaderController() {
 
     self.refreshCotroller = function() {
         initButtons();
-    }
+    };
 
 
     self.departments.push(new ObservableDepartment("Praktikum 3", [{"name" : "Soap-Client", "nav" : "soapclient"}, {"name" : "Rest-Client", "nav" : "restclient"}]));
