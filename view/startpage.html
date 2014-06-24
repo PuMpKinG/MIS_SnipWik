@@ -11,6 +11,14 @@
             </div> 
         </div>
         
+        <div class="container onlineStatus">
+            <div class="row">
+                <div class="col-xs-4"></div>
+                <div class="col-xs-4" style="text-align: center"><button data-bind="click: switchMode, html: btnOnlineTxt, css: onlineState() ? 'btn btn-success' : 'btn btn-danger'"></button></div>
+                <div class="col-xs-4"></div>
+            </div>
+        </div>
+        
         <div class="container webserviceGrp">
             <div class="row">
                 <div class="col-xs-1"></div>

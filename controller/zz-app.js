@@ -1,9 +1,7 @@
-﻿function App() {
+function App() {
     var app = this;
     
     app.smartService = new ServiceFacade();
-    document.addEventListener("offline", app.smartService.ConnectionStateChanged(0), false);
-    document.addEventListener("online", app.smartService.ConnectionStateChanged(1), false);
     
     // helper controller
     app.state = new AppState();
