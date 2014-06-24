@@ -29,11 +29,13 @@ function StartpageController(){
             self.onlineState(false);
             
             app.smartService.ConnectionStateChanged(0);
+            app.requestQueueService.ConnectionStateChanged(0);
         } else {
             self.btnOnlineTxt("Online");
             self.onlineState(true);
             
             app.smartService.ConnectionStateChanged(1);
+            app.requestQueueService.ConnectionStateChanged(1);
         }
     };
     

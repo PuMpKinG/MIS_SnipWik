@@ -2,15 +2,120 @@
     <div id="scroller">
 
         <h1>Doodle Umfrage</h1>
+        
+        <div class="control-group container">
+            <label class="control-label row" for="selectforAnswer">Umfrage auswählen</label>
+            <div class="row">
+            <div class="controls col-xs-6">
+                <select id="selectforAnswer" name="selectforAnswer" class="input-xlarge" data-bind="
+                       options: polls,
+                       optionsText: 'pollName',
+                       value: selectedPoll">
+                </select>
+            </div>
+            <button class="btn btn-primary okBtn col-xs-5" data-bind="click: selectedPollChanged">Abrufen</button>
+       </div>
+            </div>
+
+        <div class="container restOption" style="margin-bottom: 30px" >
+            <div class="whatDoTitle row">Informationen zum gewählten Doodle:</div>
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle"> <b>Titel:</b></div>
+                <div class="col-xs-9 fieldInput"> 
+                    <span data-bind="html: title" class="col-xs-12">
+                </div>
+            </div>
+
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle"><b>Beschreibung:</b></div>
+                <div class="col-xs-9 fieldInput">
+                    <textarea id="Beschreibung" data-bind="value: description" name="Beschreibung" disabled=""></textarea>
+                </div>
+            </div>
+
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle"><b>Name:</b></div>
+                <div class="col-xs-9 fieldInput">
+                    <span data-bind="html: name" class="col-xs-12">
+                </div>
+            </div>
+
+            <div class="row fieldrow">
+                <div class="col-xs-3 fieldTitle"><b>Email:</b></div>
+                <div class="col-xs-9 fieldInput">
+                   <span data-bind="html: email" class="col-xs-12">
+                </div>
+            </div>
+
+            <div class="row optionrow" >
+                <div class="col-xs-12" data-bind="foreach: options">
+                    <div class="row">
+                        <div class="col-xs-2 fieldTitle" data-bind="html: id"></div>
+                        <div class="col-xs-10 fieldInput">
+                            <b><span data-bind="html: option" class="col-xs-12"></span></b>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            
+            
+             <div class="row optionrow" >
+                <div class="col-xs-12" data-bind="foreach: participants">
+                    <div class="row">
+                        <div class="col-xs-3 fieldTitle" data-bind="html: pname"></div>
+                        <div class="col-xs-9 fieldInput">
+                            <b> <span data-bind="html: printSelected" class="col-xs-12"></span></b>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            
+        </div>
+
+
+
+        <!-- *********************  Footer Template 1 ******************************** -->
+        <!-- **** Footer with 3 tasks: for profil view              [v0.18]       **** -->
+        <!-- ************************************************************************* -->
+        <div class="footer_bar container" id="footer">
+            <div class="row">
+                <div class="col-xs-3 footer_left" data-bind="click: function() {app.navigateTo('rest/newdoodle')}">
+                    <div>New</div>
+                </div>
+                <div class="col-xs-3 footer_left" data-bind="click: function() {app.navigateTo('rest/answerdoodle')}">
+                    <div>Answer</div>
+                </div>
+               <div class="col-xs-3 footer_right" data-bind="click: function() {app.navigateTo('rest/getdoodle')}">
+                    <div>SmartService</div>
+                </div>
+                <div class="col-xs-3 footer_right" data-bind="click: function() {app.navigateTo('rest/deletedoodle')}">
+                    <div>RequestQueue</div>
+                </div>
+            </div>
+
+        </div>
+        <!-- ************************************************************************* -->
+
+
+    </div>
+</section>
+
+
+<!--<section id="wrapper">
+    <div id="scroller">
+
+        <h1>Doodle Umfrage</h1>
 
          <div class="container deletePoll" >
             <form class="form-horizontal">
                 <fieldset>
 
-                    <!-- Form Name -->
+                     Form Name 
                     <legend>Umfrage löschen</legend>
 
-                    <!-- Select Basic -->
+                     Select Basic 
                     <div class="control-group">
                         <label class="control-label" for="selectforAnswer">Umfrage auswählen</label>
                         <div class="controls">
@@ -22,7 +127,7 @@
                         </div>
                     </div>
 
-                    <!-- Button -->
+                     Button 
                     <div class="control-group">
                         <label class="control-label" for="deleteBtn"></label>
                         <div class="controls">
@@ -38,9 +143,9 @@
      
 
 
-     <!-- *********************  Footer Template 1 ******************************** -->
-        <!-- **** Footer with 3 tasks: for profil view              [v0.18]       **** -->
-        <!-- ************************************************************************* -->
+      *********************  Footer Template 1 ******************************** 
+         **** Footer with 3 tasks: for profil view              [v0.18]       **** 
+         ************************************************************************* 
         <div class="footer_bar container" id="footer">
             <div class="row">
                 <div class="col-xs-3 footer_left" data-bind="click: function() {app.navigateTo('rest/newdoodle')}">
@@ -50,15 +155,15 @@
                     <div>Answer</div>
                 </div>
                 <div class="col-xs-3 footer_right" data-bind="click: function() {app.navigateTo('rest/getdoodle')}">
-                    <div>Call</div>
+                    <div>SmartService</div>
                 </div>
                 <div class="col-xs-3 footer_right" data-bind="click: function() {app.navigateTo('rest/deletedoodle')}">
-                    <div>Delete</div>
+                    <div>RequestQueue</div>
                 </div>
             </div>
 
         </div>
-        <!-- ************************************************************************* -->
+         ************************************************************************* 
 
     </div>
-</section>
+</section>-->

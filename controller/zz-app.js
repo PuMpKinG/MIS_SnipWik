@@ -2,6 +2,7 @@ function App() {
     var app = this;
     
     app.smartService = new ServiceFacade();
+    app.requestQueueService = new ServiceFacadeRequesQueue();
     
     // helper controller
     app.state = new AppState();

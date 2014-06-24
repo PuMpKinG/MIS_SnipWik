@@ -11,13 +11,12 @@ RemoteService.prototype = Object.create(IService);
 // Implementations
 RemoteService.prototype.getItems = function(pollId, callback) {
     app.rest.getPoll(pollId, function(data) {
-        cachedData = data;
         callback(data);
     });
 };
 
 ///////////////////////// Service Facade Class /////////////////////////
-function ServiceFacade() {
+function ServiceFacadeRequesQueue() {
     var networkState = 0;
     var iService;
     var requestQueue  = new Array;
@@ -37,7 +36,7 @@ function ServiceFacade() {
             console.log("Connection state changed to online");
             mustQueue = false;
             requestQueue.forEach(function(item){
-                iService.getItems(item.pollId, item.callback);
+                alert("Requesting poll: " + item.pollId);
             });
         } else {
             console.log("Connection state changed to offline");
@@ -53,7 +52,7 @@ function ServiceFacade() {
        }
     };
     
-    
+    this.init();
 }  
 
 

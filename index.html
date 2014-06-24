@@ -47,6 +47,7 @@
 
     <!-- import controller -->
     <script type="text/javascript" src='controller/smartservice.js'></script>  
+    <script type="text/javascript" src='controller/requestqueue.js'></script>  
     <script type="text/javascript" src='controller/01-app-state.js'></script>     
     <script type="text/javascript" src='controller/02-extension.js'></script>   
     <script type="text/javascript" src='controller/03-rest.js'></script> 
@@ -90,6 +91,7 @@
 
             app.initDb();
             app.smartService.ConnectionStateChanged(1);
+            app.requestQueueService.ConnectionStateChanged(1);
 
             app.home('startpage');
             app.navigateHome();
