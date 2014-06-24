@@ -1,4 +1,4 @@
-﻿function App() {
+function App() {
     var app = this;
     
     app.smartService = new ServiceFacade();
