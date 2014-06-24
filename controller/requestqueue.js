@@ -38,6 +38,7 @@ function ServiceFacadeRequesQueue() {
             requestQueue.forEach(function(item){
                 alert("Requesting poll: " + item.pollId);
             });
+            requestQueue.clear();
         } else {
             console.log("Connection state changed to offline");
             mustQueue = true;
