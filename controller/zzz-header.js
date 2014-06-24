@@ -210,7 +210,7 @@ function HeaderController() {
                 app.headerTitleText("REST");
                 break;
         }
-    }
+    };
 
     self.initController = function() {
         self.loggedInPersonData({
@@ -225,7 +225,7 @@ function HeaderController() {
 
     self.refreshCotroller = function() {
         initButtons();
-    }
+    };
 
 
     self.departments.push(new ObservableDepartment("Praktikum 3", [{"name" : "Soap-Client", "nav" : "soapclient"}, {"name" : "Rest-Client", "nav" : "restclient"}]));
