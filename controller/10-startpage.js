@@ -23,6 +23,10 @@ function StartpageController(){
         app.navigateTo("configuration")
     };
     
+    self.navToLoc = function(){
+        app.navigateTo("location")
+    };
+    
     self.switchMode = function() {
         if (self.onlineState()) {
             self.btnOnlineTxt("Offline");
